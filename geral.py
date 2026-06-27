@@ -1,3 +1,4 @@
+import os
 import datetime
 from random import randint
 
@@ -26,9 +27,12 @@ def validar_nome(nome):
         nome = input('\033[31mNome Inválido, tente novamente >>> \033[m')
     return nome
 
-def validar_alt(alt):
+def validar_alt(alt,num=4):
     alt = input('Escolha a opção que deseja acessar >>> ')
-    while not (alt in '01234'):
+    aceitavel = []
+    for x in range(num+1):
+        aceitavel.append(str(x))
+    while not (alt in aceitavel):
         alt = input('\033[31mResposta Inválida, tente novamente >>> \033[m')
     return int(alt)
 
@@ -45,7 +49,7 @@ def validar_float(valor):
 def validar_data(data): #CONSTRUÇÃO
     return data
        
-##################
+####################################################
 #   CPF Apenas
 def caracter_cpf(cpf):
     cpf = cpf.replace(',','')
@@ -93,6 +97,13 @@ def cpf_valido(cpf):
 ####################################
 #   Funções Gerais
 
+def limpar():
+    nome = os.name 
+    if nome == 'nt': #WINDOWS
+        os.system('cls') 
+    else: #POSIX
+        os.system('clear')
+
 def enter():
     print()
     input(' Digite ENTER para continuar '.center(50,"="))
@@ -121,6 +132,6 @@ def gerador_id(lista):
         n2 = str(randint(0,9))
         n3 = str(randint(0,9))
         n4 = str(randint(0,9))
-        n5 = int(n1 + n2 + n3 + n4)
+        n5 = n1 + n2 + n3 + n4
         if not(n5 in lista):
             return n5

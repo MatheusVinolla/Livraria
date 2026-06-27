@@ -1,27 +1,76 @@
 #   MODÚLO DE CLIENTES
 
 from geral import *
-clientes = {} 
+from interface import *
 
+
+clientes = {
+    "12345678901": {
+        "nome": "Frisk",
+        "email": "frisk.determinado@undertale.com",
+        "telefone": "11999990001",
+        "endereco": "Ruínas Sala do Trono",
+        "nascimento": "15092015",
+        "status": True,
+    },
+    "23456789012": {
+        "nome": "Sans the Skeleton",
+        "email": "sans.badtime@undertale.com",
+        "telefone": "13988880002",
+        "endereco": "Nevadal Casa dos Irmãos",
+        "nascimento": "01041995",
+        "status": True,
+    },
+    "34567890123": {
+        "nome": "Papyrus",
+        "email": "great.papyrus@undertale.com",
+        "telefone": "13988880003",
+        "endereco": "Nevada Guarda Real",
+        "nascimento": "22071997",
+        "status": True,
+    },
+    "45678901234": {
+        "nome": "Toriel Dreemurr",
+        "email": "toriel.mae@undertale.com",
+        "telefone": "11977770004",
+        "endereco": "Ruínas Casa da Toriel",
+        "nascimento": "08031980",
+        "status": True,
+    },
+    "56789012345": {
+        "nome": "Undyne",
+        "email": "undyne.ngahhh@undertale.com",
+        "telefone": "21966660005",
+        "endereco": "Cachoeira Casa do Peixe",
+        "nascimento": "12111992",
+        "status": True,
+    }
+}
+
+campos = ['nome','email','telefone','endereco','nascimento','status']
 
 ###########################################
 
 def start():
     alternativa = ''
     while alternativa != 0:
-        menu()
+        menu_cliente()
         alternativa = validar_alt(alternativa)
         match alternativa:
             case 1: #CADASTRAR
+                tela_cadastrar()
                 cadastrar(clientes)
                 enter()
             case 2: #ATUALIZAR
+                tela_atualizar()
                 atualizar(clientes)
                 enter()
             case 3: #PESQUISAR
+                tela_pesquisar()
                 pesquisar(clientes)
                 enter()
             case 4: #DELETAR
+                tela_deletar()
                 deletar(clientes)
                 enter()
 
@@ -60,7 +109,7 @@ def cadastrar(dicionario):
     return dicionario
     
 
-def atualizar(data): #INCOMPLETA
+def atualizar(dicionario): #INCOMPLETA
     pass 
 
 def pesquisar(dicionario):
@@ -78,7 +127,8 @@ def deletar(dicionario):
         print()
         dicionario[alvo]['status'] = False
         print('EXCLUSÃO FEITA COM SUCESSO!')
+        return dicionario
     else:
         print('CPF/CLIENTE NÃO Encontrado...tente novamente!')
+        return dicionario
 
-start() 

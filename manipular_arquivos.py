@@ -1,49 +1,7 @@
+#   MÓDULO DE MANIPULAÇÃO DE ARQUIVOS EXTERNOS
 from os import path
-lista = ['nome','email','telefone','endereco','nascimento','status']
-dicionario_teste = {
-    "12345678901": {
-        "nome": "Frisk",
-        "email": "frisk.determinado@undertale.com",
-        "telefone": "11999990001",
-        "endereco": "Ruínas Sala do Trono",
-        "nascimento": "15092015",
-        "status": True,
-    },
-    "23456789012": {
-        "nome": "Sans the Skeleton",
-        "email": "sans.badtime@undertale.com",
-        "telefone": "13988880002",
-        "endereco": "Nevadal Casa dos Irmãos",
-        "nascimento": "01041995",
-        "status": True,
-    },
-    "34567890123": {
-        "nome": "Papyrus",
-        "email": "great.papyrus@undertale.com",
-        "telefone": "13988880003",
-        "endereco": "Nevada Guarda Real",
-        "nascimento": "22071997",
-        "status": True,
-    },
-    "45678901234": {
-        "nome": "Toriel Dreemurr",
-        "email": "toriel.mae@undertale.com",
-        "telefone": "11977770004",
-        "endereco": "Ruínas Casa da Toriel",
-        "nascimento": "08031980",
-        "status": True,
-    },
-    "56789012345": {
-        "nome": "Undyne",
-        "email": "undyne.ngahhh@undertale.com",
-        "telefone": "21966660005",
-        "endereco": "Cachoeira Casa do Peixe",
-        "nascimento": "12111992",
-        "status": True,
-    },
-}
 
-def start(arquivo):
+def start(arquivo): #VERIFICAR A EXISTÊNCIA E CRIAR O ARQUIVO
     global dicionario_teste
 
     criacao = existe(arquivo)
