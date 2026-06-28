@@ -38,6 +38,16 @@ def tela_cliente():
     """)
     print(f'\033[1;33m{msg}\033[m',end='')
 
+def tela_relatorio():
+    msg = (r"""
+████  █████ █      ███  █████  ███  ████  ███  ███  
+█   █ █     █     █   █   █   █   █ █   █  █  █   █ 
+████  ████  █     █████   █   █   █ ████   █  █   █ 
+█  █  █     █     █   █   █   █   █ █  █   █  █   █ 
+█   █ █████ █████ █   █   █    ███  █   █ ███  ███  
+    """) 
+    print(f'\033[1;33m{msg}\033[m',end='')
+
 def tela_cadastrar():
     msg = (r""" _____             _              _                
 /  __ \           | |            | |               
@@ -148,4 +158,21 @@ def menu_cliente():
 |  [4] Deletar   Cliente
 |  [0] Sair\033[m""")
 
-                            
+def menu_relatorio():                        
+    print(f"""\033[1;33m
+{'='*50}
+|  [1] Relatórios do ESTOQUE
+|  [2] Relatórios dos CLIENTES 
+|  [3] Relatórios das COMPRAS
+|  [0] Sair\033[m""")
+
+def menu_relatorio_geral(): 
+    print(f"""\033[1;33m
+{'='*50}
+|  [1] GERAL            | Todos os dados
+|  [2] FILTRO           | Seleção de dados 
+|  [3] PROCESSAMENTO    | Cálculo com seleção 
+|  [4] COMBINAÇÃO       | Campo em específico
+|  [0] Sair\033[m""")
+                    
+                    

@@ -54,6 +54,7 @@ campos = ['nome','email','telefone','endereco','nascimento','status']
 def start(arquivo,dicionario):
     alternativa = ''
     while alternativa != 0:
+        tela_clientes()
         menu_cliente()
         alternativa = validar_alt(alternativa)
         match alternativa:
