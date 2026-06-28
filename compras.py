@@ -1,6 +1,6 @@
 from geral import *
 from datetime import datetime
-
+from manipular_arquivos import escrever
 fiscal = {
     '1542': {  # ID da compra aleatório de 4 dígitos
         'isbn': '10001',  # Conecta com 'Noites Brancas'
@@ -30,7 +30,7 @@ fiscal = {
 
 campos = ['isbn','data','preco','cpf']
 
-def start():
+def start(arquivo,clientes,estoque,fiscal):
     alternativa = ''
     while alternativa != 0:
         tela_compra()
@@ -41,6 +41,7 @@ def start():
             case 1:  #CADASTRAR
                 tela_cadastrar()
                 cadastrar(clientes,estoque,fiscal)
+                escrever(arquivo,fiscal)
             case 2:  #PESQUISAR
                 tela_pesquisar()
                 pesquisar(fiscal)

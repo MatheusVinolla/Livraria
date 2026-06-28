@@ -21,15 +21,17 @@ while alt_global != 0:
     limpar()
     match alt_modulo:
         case 1: #estoque
-            estoque.start()
+            estoque.start('estoque.txt',estoque)
         case 2: #clientes
-            clientes.start()
+            clientes.start('clientes.txt',clientes)
         case 3: #compras
-            compras.start()
+            compras.start('fiscal.txt',clientes,estoque,fiscal)
         case 4: #relatorios
             relatorios.start()
         case 5: #sobre
-           pass 
+            tela_sobre()
+            sobre()
+            enter() 
         case 0: #EXIT
             print('Obrigado e volte sempre! :D')
 

@@ -2,7 +2,7 @@
 
 from geral import *
 from interface import *
-
+from manipular_arquivos import escrever
 
 clientes = {
     "12345678901": {
@@ -51,7 +51,7 @@ campos = ['nome','email','telefone','endereco','nascimento','status']
 
 ###########################################
 
-def start():
+def start(arquivo,dicionario):
     alternativa = ''
     while alternativa != 0:
         menu_cliente()
@@ -59,19 +59,22 @@ def start():
         match alternativa:
             case 1: #CADASTRAR
                 tela_cadastrar()
-                cadastrar(clientes)
+                cadastrar(dicionario)
+                escrever(arquivo,dicionario)
                 enter()
             case 2: #ATUALIZAR
                 tela_atualizar()
-                atualizar(clientes)
+                atualizar(dicionario)
+                escrever(arquivo,dicionario)
                 enter()
             case 3: #PESQUISAR
                 tela_pesquisar()
-                pesquisar(clientes)
+                pesquisar(dicionario)
                 enter()
             case 4: #DELETAR
                 tela_deletar()
-                deletar(clientes)
+                deletar(dicionario)
+                escrever(arquivo,dicionario)
                 enter()
 
 campos = ['cpf','titulo','email','telefone','endereco','nascimento']

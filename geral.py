@@ -1,7 +1,6 @@
 import os
 import datetime
 from random import randint
-
 ######################################################
 #   Validações:
 def validar_email(email):
@@ -22,8 +21,15 @@ def validar_telefone(tel):
         tel = input('\033[31mNúmero Inválido, tente novamente >>> \033[m')
     return tel
 
+def caracter_nome(nome):
+    for letra in nome:
+        if (letra.isdigit()):
+            return False
+    return True
+
+
 def validar_nome(nome):
-    while (len(nome.strip()) == 0):
+    while (len(nome.strip()) == 0) and (caracter_nome(nome)):
         nome = input('\033[31mNome Inválido, tente novamente >>> \033[m')
     return nome
 
@@ -48,7 +54,14 @@ def validar_float(valor):
 
 def validar_data(data): #CONSTRUÇÃO
     return data
-       
+
+def validar_ano(ano):
+    ano_atual = datetime.datetime.now().year      
+    while (ano > ano_atual) and not(ano.isdigit()) and (len(ano) != 4):
+        valor = input('\033[31mAno Inválido, tente novamente >>> \033[m')
+    return ano
+        
+
 ####################################################
 #   CPF Apenas
 def caracter_cpf(cpf):
@@ -135,3 +148,16 @@ def gerador_id(lista):
         n5 = n1 + n2 + n3 + n4
         if not(n5 in lista):
             return n5
+
+def sobre():
+    print("""\033[1;33m
+    <<< TRABALHO DA DISCIPLINA DE ALGORITMOS E LÓGICA DE PROGRAMAÇÃO >>>
+    TRABALHO: PyBooks
+    AUTOR: Matheus Vínolla Medeiros e Silva
+    UNIVERSIDADE: Universidade Federal do Rio Grande do Norte
+    DIVISÃO: Centro de Ensino Superior do Seridó
+    DOCENTE: Flavius Gorgônio 
+    LICENÇA: Licença Livre GPU 3.0
+    <<< ------------------------------------------------------------ >>>
+    \033[m""")
+    

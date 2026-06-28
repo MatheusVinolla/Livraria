@@ -2,7 +2,7 @@
 
 from geral import *
 from interface import *
-
+from manipular_arquivos import escrever
 
 estoque = {
     '10001': {
@@ -51,7 +51,7 @@ campos = ['ISBN''TÍTULO','AUTOR','ANO','PREÇO','CATEGORIA']
 
 #################################
 
-def start():
+def start(arquivo,dicionario):
     alternativa = ''
     while alternativa != 0:
         tela_estoque()
@@ -61,19 +61,22 @@ def start():
         match alternativa:
             case 1: #CADASTRAR
                 tela_cadastrar()
-                estoque = cadastrar(estoque)
+                estoque = cadastrar(dicionario)
+                escrever(arquivo,dicionario)
                 enter()
             case 2: #ATUALIZAR
                 tela_atualizar()
-                estoque = atualizar(estoque)
+                estoque = atualizar(dicionario)
+                escrever(arquivo,dicionario)
                 enter()
             case 3: #PESQUISAR
                 tela_pesquisar()
-                pesquisar(estoque)
+                pesquisar(dicionario)
                 enter()
             case 4: #DELETAR
                 tela_deletar()
-                estoque = deletar(estoque)
+                estoque = deletar(dicionario) 
+                escrever(arquivo,dicionario)
                 enter()
 
 
@@ -82,6 +85,7 @@ def cadastrar(dicionario):
     titulo = input('Insira o TÍTULO para CADASTRAR: ')   
     autor = input('Insira o/a AUTOR/A para CADASTRAR: ')
     ano = input('Insira o ANO para CADASTRAR: ')
+    ano = validar_ano(ano)
     preco = input('Insira o PREÇO para CADASTRAR: ')
     preco = validar_float(preco)
     categoria = input('Insira a CATEGORIA para CADASTRAR: ')
