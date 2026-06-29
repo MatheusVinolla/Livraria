@@ -40,7 +40,8 @@ def start_estoque(estoque):
             case 3: #PROCESSAMENTO
                 pass
             case 4: #COMBINAÇÃO
-                pass
+                combinacao_estoque()
+                enter()
 
 def start_clientes(clientes):
     alternativa = ''
@@ -59,7 +60,8 @@ def start_clientes(clientes):
             case 3: #PROCESSAMENTO
                 pass
             case 4: #COMBINAÇÃO
-                pass
+                combinacao_clientes()
+                enter()
 
 def start_compras(fiscal):
     alternativa = ''
@@ -76,8 +78,8 @@ def start_compras(fiscal):
             case 3: #PROCESSAMENTO
                 pass
             case 4: #COMBINAÇÃO
-                pass
-
+                combinacao_compras()
+                enter()
     
 #############################################
 #   Listagem GLOBAL dos Relatórios
@@ -184,69 +186,6 @@ def combinacao_estoque(estoque,alt):
 
 
 
-clientes = {
-    "12345678901": {
-        "nome": "Frisk",
-        "email": "frisk.determinado@undertale.com",
-        "telefone": "11999990001",
-        "endereco": "Ruínas Sala do Trono",
-        "nascimento": "15092015",
-        "status": True,
-    },
-    "23456789012": {
-        "nome": "Sans the Skeleton",
-        "email": "sans.badtime@undertale.com",
-        "telefone": "13988880002",
-        "endereco": "Nevadal Casa dos Irmãos",
-        "nascimento": "01041995",
-        "status": True,
-    },
-    "34567890123": {
-        "nome": "Papyrus",
-        "email": "great.papyrus@undertale.com",
-        "telefone": "13988880003",
-        "endereco": "Nevada Guarda Real",
-        "nascimento": "22071997",
-        "status": True,
-    },
-    "45678901234": {
-        "nome": "Toriel Dreemurr",
-        "email": "toriel.mae@undertale.com",
-        "telefone": "11977770004",
-        "endereco": "Ruínas Casa da Toriel",
-        "nascimento": "08031980",
-        "status": True,
-    },
-
-    "56789012345": {
-        "nome": "Undyne",
-        "email": "undyne.ngahhh@undertale.com",
-        "telefone": "21966660005",
-        "endereco": "Cachoeira Casa do Peixe",
-        "nascimento": "12111992",
-        "status": True,
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def combinacao_clientes(clientes,alt):
         # print(f"|*| {'CPF':^11} |*| {'NOME':^20} |*| {'EMAIL':^30} |*| {'TELEFONE':^11} |*| {'ENDEREÇO':^30} |*| {'NASCIMENTO':^10} |*|")
     cabecalho_cpf = (f"     |*| {'CPF':^11} |*| ")
@@ -291,4 +230,46 @@ def combinacao_clientes(clientes,alt):
             texto_final = texto_isbn + texto_campo + texto_bonito
             print(texto_final)
 
-combinacao_clientes(clientes,5)
+
+def combinacao_compras(fiscal,alt):        
+    # print(f"     |*| {'NOTA FISCAL':^11} |*| {'ISBN':^5} |*| {'DATA':^10} |*| {'PREÇO':^5} |*| {'CPF':^11} |*|")
+    cabecalho_id_compra = (f"     |*| {'NOTA FISCAL':^11} |*| ")
+    match alt:
+        case 1: #ISBN
+            espaco_campo = (f"{' ':^5} |*|")
+            cabecalho_campo = (f"{'ISBN':5} |*|")
+            filtro = 'isbn'
+            tam = 5
+        case 2: #DATA
+            espaco_campo = (f"{' ':^10} |*|")
+            cabecalho_campo = (f"{'DATA':^10} |*|")
+            filtro = 'data'
+            tam = 10
+        case 3: #PREÇO
+            espaco_campo = (f"{' ':^5} |*|")
+            cabecalho_campo = (f"{'PREÇO':^5} |*|")
+            filtro = 'preco'
+            tam = 5
+        case 4: #CPF
+            espaco_campo = (f"{' ':^11} |*|")
+            cabecalho_campo = (f"{'CPF':^11} |*|")
+            filtro = 'cpf'
+            tam = 11 
+
+
+    titulo = cabecalho_id_compra + cabecalho_campo
+    print(titulo)
+
+    espaco_inicial = (f"     |*| {' ':^11} |*| ")
+    espaco_final = espaco_inicial + espaco_campo
+    
+    for id_compra in fiscal:
+        print(espaco_final)
+        texto_id_compra = (f"     |*| {id_compra:^11} |*| ")
+        texto_campo = (f"{fiscal[id_compra][filtro]}".center(tam))
+        texto_bonito = " |*|"
+        texto_final = texto_id_compra+ texto_campo + texto_bonito
+        print(texto_final)
+
+
+
