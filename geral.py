@@ -33,7 +33,7 @@ def validar_nome(nome):
         nome = input('\033[31mNome Inválido, tente novamente >>> \033[m')
     return nome
 
-def validar_alt(alt,num=4):
+def validar_alt(num=4):
     alt = input('Escolha a opção que deseja acessar >>> ')
     aceitavel = []
     for x in range(num+1):

@@ -65,9 +65,80 @@ estoque = {
         'preco': 49.90,
         'categoria': 'Quadrinhos',
         'status': True
+    },
+    '60006': {
+        'titulo': 'Fundação',
+        'autor': 'Isaac Asimov',
+        'ano': 2019,
+        'preco': 35.50,
+        'categoria': 'Ficção Científica',
+        'status': True
+    },
+    '70007': {
+        'titulo': 'Neuromancer',
+        'autor': 'William Gibson',
+        'ano': 2020,
+        'preco': 42.00,
+        'categoria': 'Ficção Científica',
+        'status': True
+    },
+    '80008': {
+        'titulo': '1984',
+        'autor': 'George Orwell',
+        'ano': 2018,
+        'preco': 29.90,
+        'categoria': 'Ficção Científica',
+        'status': True
+    },
+    '90009': {
+        'titulo': 'Orgulho e Preconceito',
+        'autor': 'Jane Austen',
+        'ano': 2016,
+        'preco': 19.90,
+        'categoria': 'Romance',
+        'status': True
+    },
+    '11111': {
+        'titulo': 'Dom Casmurro',
+        'autor': 'Machado de Assis',
+        'ano': 2020,
+        'preco': 15.50,
+        'categoria': 'Romance',
+        'status': True
+    },
+    '22222': {
+        'titulo': 'Drácula',
+        'autor': 'Bram Stoker',
+        'ano': 2022,
+        'preco': 25.00,
+        'categoria': 'Terror',
+        'status': True
+    },
+    '33333': {
+        'titulo': 'O Hobbit',
+        'autor': 'J.R.R. Tolkien',
+        'ano': 2021,
+        'preco': 40.00,
+        'categoria': 'Fantasia',
+        'status': True
+    },
+    '44444': {
+        'titulo': 'Harry Potter',
+        'autor': 'J.K. Rowling',
+        'ano': 2019,
+        'preco': 35.00,
+        'categoria': 'Fantasia',
+        'status': True
+    },
+    '55555': {
+        'titulo': 'Armas e Germes',
+        'autor': 'Jared Diamond',
+        'ano': 2014,
+        'preco': 60.00,
+        'categoria': 'História',
+        'status': False # Outro soft delete
     }
 }
-
 
 
 
@@ -110,30 +181,35 @@ def testando():
 
 
 
-
+##############################################################################
 
 
 
 copia = estoque.copy()
 categorias_disponiveis = []
+
+for isbn in copia: #COLOCAR AS CATEGORIAS TODAS DISPONIVEIS
+    cat = copia[isbn]['categoria']
+    if not(cat in categorias_disponiveis):
+        categorias_disponiveis.append(cat)
+
 temp_moda = []
+temp_indices = []
+
 categoria_moda = []
+
 while len(copia) > 0: 
     maior = 0
-    for isbn in copia:
-        cat = copia[isbn]['categoria']
-        if not(cat in categorias_disponiveis):
-            categorias_disponiveis.append(cat)
-
-    calculo = 0
+    calculo = 0 
+    #CONTAR QUANTAS VEZES HOUVE REPETIÇÃO
     for c in categorias_disponiveis: 
-        for isbn in copia:
+        for isbn in copia: #.count() para dicionario
             if copia[isbn]['categoria'] == c:
-                calculo += 1        
-
+                calculo += 1         
         if calculo > maior:
             maior = calculo
             temp_moda.clear()
+            temp_indices.clear()
             temp_moda.append(c) 
         elif calculo == maior:
             temp_moda.append(c)
@@ -141,16 +217,18 @@ while len(copia) > 0:
     for c in temp_moda:
         categoria_moda.append(c)
 
-
-    for categoria_moda 
-
     for isbn in copia:
         cat = copia[isbn]['categoria'] 
         for c in categoria_moda:
             if c == cat:
-                del copia[isbn]  
+                temp_indices.append(isbn)
+
+    for i in temp_indices:
+        del copia[i] 
+
     categorias_disponiveis.clear()
     temp_moda.clear()
+    temp_indices.clear()
           
 print(categoria_moda) 
 
