@@ -1,5 +1,5 @@
 from geral import *
-
+from teste import fiscal
 def start(estoque,clientes,fiscal):
     alternativa = ''
     while alternativa != 0:
@@ -272,4 +272,64 @@ def combinacao_compras(fiscal,alt):
         print(texto_final)
 
 
+##########################################
+#   FILTRO COM PROCESSAMENTO
+
+def processamento_estoque(estoque):
+    
+
+def processamento_clientes(clientes): #NÃO ESTÁ PRONTO AINDA
+    pass
+   # print('='*145)
+   # print(f"|*| {'CPF':^11} |*| {'NOME':^20} |*| {'EMAIL':^30} |*| {'TELEFONE':^11} |*| {'ENDEREÇO':^30} |*| {'NASCIMENTO':^10} |*|")
+
+   # for cpf in clientes:
+   #     data = datetime.date.today()
+   #     idade_valida = True if calcular_data(data,clientes[cpf]['nascimento']) >= 18 else False
+   #     if clientes[cpf]['status'] == valor_verdade and idade_valida:
+   #         tudo = []
+   #         tudo.append(cpf)
+   #         for c in clientes[cpf].values():
+   #             tudo.append(c)
+   #         print(f"|*| {' ':^11} |*| {' ':^20} |*| {' ':^30} |*| {' ':^11} |*| {' ':^30} |*| {' ':^10} |*|")
+   #         print(f"|*| {tudo[0]:^11} |*| {tudo[1]:^20} |*| {tudo[2]:^30} |*| {tudo[3]:^11} |*| {tudo[4]:^30} |*| {tudo[5]:^10} |*|")
+
+   # print('='*145)
+
+
+def processamento_compras(fiscal):
+   #   ORDENAR DICIONARIO POR ONDEM CRESCENTE DE UM DADO CRITÉRIO
+    copia = fiscal.copy()
+    indices = []
+    indices_permanentes = []
+
+    while len(copia) > 0: 
+        maior = -1
+        for notas in copia:
+            preco_nota = copia[notas]['preco']
+            if preco_nota > maior:
+                maior = preco_nota
+                indices.clear()
+                indices.append(notas)
+            elif preco_nota == maior:
+                indices.append(notas) 
+        for i in indices:
+            indices_permanentes.append(i)
+            del copia[i]
+        indices.clear()
+    #INDICES ORGANIZADOS CORRETAMENTE PARA PASSAR
+
+
+    print('='*80)
+    print(f"     |*| {'NOTA FISCAL':^11} |*| {'ISBN':^5} |*| {'DATA':^10} |*| {'PREÇO':^5} |*| {'CPF':^11} |*|")
+    
+    for nota in indices_permanentes:
+        tudo = []
+        tudo.append(nota)
+        for c in fiscal[nota].values():
+            tudo.append(c)
+        print(f"     |*| {' ':^11} |*| {' ':^5} |*| {' ':^10} |*| {' ':^5} |*| {' ':^11} |*|")
+        print(f"     |*| {tudo[0]:^11} |*| {tudo[1]:^5} |*| {tudo[2]:^10} |*| {tudo[3]:^5} |*| {tudo[4]:^11} |*|")
+
+    print('='*80)
 
