@@ -8,6 +8,7 @@ def validar_email(email):
         email = input('\033[31mEmail Inválido, tente novamente >>> \033[m')
     return email
 
+
 def caracter_telefone(tel):
     tel = tel.replace('-','')
     tel = tel.replace(' ','')
@@ -15,23 +16,26 @@ def caracter_telefone(tel):
     tel = tel.replace(')','')
     return tel 
 
+
 def validar_telefone(tel):
     tel = caracter_telefone(tel) 
     while not(len(tel) != 11) and not(tel.isdigit()):
         tel = input('\033[31mNúmero Inválido, tente novamente >>> \033[m')
     return tel
 
-def caracter_nome(nome):
+
+def caracter_nome(nome): #Verifica se tem algum número
     for letra in nome:
         if (letra.isdigit()):
             return False
     return True
 
 
-def validar_nome(nome):
+def validar_nome(nome): #E verifica também se o nome está vazio
     while (len(nome.strip()) == 0) and (caracter_nome(nome)):
         nome = input('\033[31mNome Inválido, tente novamente >>> \033[m')
     return nome
+
 
 def validar_alt(num=4):
     alt = input('Escolha a opção que deseja acessar >>> ')
@@ -86,7 +90,7 @@ def cpf_valido(cpf):
     #Verificar o tamanho
     if not(len(cpf) == 11):
         return False
-
+    #Verificar se o digito 1 corresponde ao padrão de CPF
     digito1 = 0
     for num in range(10,1,-1):
         digito1 += num * int(cpf[10 - num])  
@@ -96,6 +100,7 @@ def cpf_valido(cpf):
     if not(digito1 == int(cpf[9])):
         return False    
 
+    #Verificar se o digito 2 corresponde ao padrão de CPF
     digito2 = 0
     for num in range(11,1,-1):
         digito2 += num * int(cpf[11 - num])  
@@ -122,24 +127,25 @@ def enter():
     input(' Digite ENTER para continuar '.center(50,"="))
 
 
-def menu():
-    print("""
-    [1] CADASTRAR
-    [2] ATUALIZAR
-    [3] PESQUISAR
-    [4] DELETAR
-    [0] Sair...
-    """)
-
-def listagem(dicionario):
-    print('_'*70)
-    del dicionario['status']
-    for nome,valor in dicionario.items():
+def listagem(dicionario): #Listagem especifica para função de pesquisar
+    copia = dicionario.copy()
+    del copia['status']
+    print('_'*70) 
+    for nome,valor in copia.items():
         print(f': {nome.title():^20} |*| {valor:<20}')
-
     print('_'*70)
 
-def gerador_id(lista):
+
+def recolher_ano(data):
+    """
+    Apenas retornar o ano de uma string
+    Na forma de inteiro para cálculo
+    """
+    ano = data[-4:]
+    return int(ano)
+
+
+def gerador_id(lista): #O ID DA NOTA FISCAL
     while True: 
         n1 = str(randint(0,9))
         n2 = str(randint(0,9))
@@ -148,6 +154,14 @@ def gerador_id(lista):
         n5 = n1 + n2 + n3 + n4
         if not(n5 in lista):
             return n5
+
+def atualizar_campo(mensagem,antigo_valor):
+    novo_valor = input(f"{mensagem}")
+    if (variavel.strip()) #Variavel vazia, manter o dado anterior
+        return antigo_valor
+    else:
+        return novo_valor 
+
 
 def sobre():
     print("""\033[1;33m

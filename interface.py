@@ -93,7 +93,7 @@ def tela_deletar():
     linha = '_' * 50
     print(f'\033[1m{msg}\n{linha}\n\033[m')
 
-
+#   REMANESCENTE DA VERSÃO BETA QUE FOI REAPROVEITADA   
 def tela_historico():
     msg = (r""" _   _  _       _                 _              
 | | | |(_)     | |               (_)             
@@ -176,3 +176,10 @@ def menu_relatorio_geral():
 |  [0] Sair\033[m""")
                     
                     
+def menu(): #PROVAVELMENTE TAMBÉM AINDA REMANESCENTE...
+    print("""
+    [1] CADASTRAR
+    [2] ATUALIZAR
+    [3] PESQUISAR
+    [4] DELETAR
+    [0] Sair...""")

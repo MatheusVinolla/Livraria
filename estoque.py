@@ -4,6 +4,7 @@ from geral import *
 from interface import *
 from manipular_arquivos import escrever
 
+#Dicionário com campos de teste
 estoque = {
     '10001': {
         'titulo': 'Noites Brancas',
@@ -27,7 +28,7 @@ estoque = {
         'ano': 2015,
         'preco': 55.90,
         'categoria': 'História',
-        'status': False  # Exemplo de livro com soft delete aplicado
+        'status': False  
     },
     '40004': {
         'titulo': 'O Iluminado',
@@ -54,19 +55,20 @@ campos = ['ISBN''TÍTULO','AUTOR','ANO','PREÇO','CATEGORIA']
 def start(arquivo,dicionario):
     alternativa = ''
     while alternativa != 0:
+        limpar()
         tela_estoque()
         menu_estoque()
-        alternativa = validar_alt(alternativa)
+        alternativa = validar_alt()
         limpar()
         match alternativa:
             case 1: #CADASTRAR
                 tela_cadastrar()
-                estoque = cadastrar(dicionario)
+                cadastrar(dicionario)
                 escrever(arquivo,dicionario)
                 enter()
             case 2: #ATUALIZAR
                 tela_atualizar()
-                estoque = atualizar(dicionario)
+                atualizar(dicionario)
                 escrever(arquivo,dicionario)
                 enter()
             case 3: #PESQUISAR
@@ -75,20 +77,28 @@ def start(arquivo,dicionario):
                 enter()
             case 4: #DELETAR
                 tela_deletar()
-                estoque = deletar(dicionario) 
+                deletar(dicionario) 
                 escrever(arquivo,dicionario)
                 enter()
 
 
 def cadastrar(dicionario):
     isbn = input('Insira o ISBN para CADASTRAR: ')
+
     titulo = input('Insira o TÍTULO para CADASTRAR: ')   
+    titulo = validar_nome(titulo)
+
     autor = input('Insira o/a AUTOR/A para CADASTRAR: ')
+    autor = validar_nome(autor)
+    
     ano = input('Insira o ANO para CADASTRAR: ')
     ano = validar_ano(ano)
+
     preco = input('Insira o PREÇO para CADASTRAR: ')
     preco = validar_float(preco)
+
     categoria = input('Insira a CATEGORIA para CADASTRAR: ')
+    categoria = validar_ano(categoria)
     
     dicionario[isbn] = {
     'titulo' : titulo,
@@ -100,49 +110,43 @@ def cadastrar(dicionario):
     }
     print()
     print('CADASTRAMENTO FEITO COM SUCESSO!')
-    return dicionario
 
-def atualizar(livros): #PASS DESENVOLVIMENTO AINDA
-   # alvo = input('Insira o ISBN que deseja PESQUISAR no ESTOQUE >>> ')
-   # if (alvo in livros) and (livros[alvo]['status'] == True):
-   #     print('ISBN/LIVRO Encontrado!')
-   #     listagem(livros[alvo])
-   #     alt_atualizar = input('Escolha o campo que deseja alterar >>>')
+def atualizar(livros):
+    alvo = input('Insira o ISBN que deseja PESQUISAR no ESTOQUE >>> ')
+    if (alvo in livros) and (livros[alvo]['status'] == True):       
 
-   #     livros[alvo]['titulo'] = input('Insira o novo TÍTULO para ATUALIZAR: ') if alt_atualizar in '16' else titulo 
+        listagem(dicionario[alvo])
+        print("Caso deseje manter os mesmos dados anterior, precione enter")
+        print()
 
-   #     autor = input('Insira o/a novo/a AUTOR/A para ATUALIZAR: ')if alt_atualizar in '26' else autor
+        titulo = atualizar_campo('Insira o novo TÍTULO para ATUALIZAR: ',livros[alvo]['titulo'])   
+        titulo = validar_nome(titulo)
 
-   #     ano = input('Insira o novo ANO para ATUALIZAR: ')if alt_atualizar in '36'
+        autor = atualizar_campo('Insira novo o/a AUTOR/A para ATUALIZAR: ',livros[alvo]['autor'])
+        autor = validar_nome(autor)
+        
+        ano = atualizar_campo('Insira o novo ANO para ATUALIZAR: ',livros[alvo]['ano'])
+        ano = validar_ano(ano)
 
-   #     preco = input('Insira o novo PREÇO para ATUALIZAR: ')if alt_atualizar in '46'
-   #     preco = validar_float(preco) 
+        preco = atualizar_campo('Insira o novo PREÇO para ATUALIZAR: ',livros[alvo]['preco'])
+        preco = validar_float(preco)
 
-   #     categoria = input('Insira a nova CATEGORIA para ATUALIZAR: ')if alt_atualizar in '56'
-
-   #     del livros[alvos] 
-   #     livros[alvos] = {
-   #     'titulo' : titulo,
-   #     'autor' : autor,
-   #     'ano' : ano,
-   #     'preco' : preco,
-   #     'categoria' : categoria,
-   #     'status' : True
-   #     }
-   #     print()
-   #     print('ATUALIZAÇÃO FEITA COM SUCESSO!')
-
-   #         case _:#INTACTO/INVALIDO
-   #                 print('Opção escolhida para permanência dos dados')
-   #             
-   #     return livros
-   #                             
-   #         
-   # 
-
-   #     
-   # else:
-   #     print('ISBN/LIVRO NÃO Encontrado...tente novamente')
+        categoria = atualizar_campo('Insira a novo CATEGORIA para ATUALIZAR: ',livros[alvo]['categoria'])
+        categoria = validar_ano(categoria)
+        
+        dicionario[isbn] = {
+        'titulo' : titulo,
+        'autor' : autor,
+        'ano' : ano,
+        'preco' : preco,
+        'categoria' : categoria,
+        'status' : True
+        }
+        print()
+        print('ATUALIZAÇÃO FEITA COM SUCESSO!')
+ 
+    else:
+        print('ISBN/LIVRO NÃO Encontrado...tente novamente')
 
 
     
@@ -160,9 +164,7 @@ def deletar(dicionario):
         print('ISBN/LIVRO Encontrado!')
         dicionario[alvo]['status'] = False
         print('EXCLUSÃO FEITA COM SUCESSO!')
-        return dicionario
     else:
         print('ISBN/LIVRO NÃO Encontrado...tente novamente')
-        return dicionario
 
 

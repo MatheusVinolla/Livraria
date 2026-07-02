@@ -1,6 +1,9 @@
+from interface import *
 from geral import *
 from datetime import datetime
 from manipular_arquivos import escrever
+
+# Dicionário teste conectando o de ESTOQUE com CLIENTES
 fiscal = {
     '1542': {  # ID da compra aleatório de 4 dígitos
         'isbn': '10001',  # Conecta com 'Noites Brancas'
@@ -35,7 +38,7 @@ def start(arquivo,clientes,estoque,fiscal):
     while alternativa != 0:
         tela_compra()
         menu_compra()
-        alternativa = validar_alt(alternativa,2)
+        alternativa = validar_alt(2)
         limpar()
         match alternativa:
             case 1:  #CADASTRAR
@@ -47,11 +50,7 @@ def start(arquivo,clientes,estoque,fiscal):
                 pesquisar(fiscal)
 
 def cadastrar(clientes,livros,fiscal):
-    """
-    >>> Fiscal
-    Independente da escolha vai retornar o dicionario
-    Se está atualizado ou mantendo o mesmo
-    """
+
     cpf = input('Insira o CPF do Cliente para pesquisar: ')
     if not(cpf in clientes):
         print('CPF/Cliente não encontrado, tente novamente...')
@@ -69,10 +68,8 @@ def cadastrar(clientes,livros,fiscal):
         fiscal[id_compra]['isbn'] = isbn 
         fiscal[id_compra]['data'] = datetime.now().replace(microsecond=0)  
         fiscal[id_compra]['preco'] = livros[isbn]['preco']   
-        return fiscal
     else:
         print('Ok, caso mude de escolha, saiba que estou aqui') 
-        return fiscal
 
 def pesquisar(fiscal):
     id_compra = input('Insira o ID DA COMPRA para pesquisar:') 

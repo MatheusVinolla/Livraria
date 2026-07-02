@@ -17,7 +17,7 @@ alt_global = ''
 while alt_global != 0:
     tela_inicial()
     menu_geral()
-    alt_modulo =  validar_alt(menu())
+    alt_modulo =  validar_alt(5)
     limpar()
     match alt_modulo:
         case 1: #estoque
@@ -27,7 +27,7 @@ while alt_global != 0:
         case 3: #compras
             compras.start('fiscal.txt',clientes,estoque,fiscal)
         case 4: #relatorios
-            relatorios.start()
+            relatorios.start(estoque,clientes,fiscal)
         case 5: #sobre
             tela_sobre()
             sobre()

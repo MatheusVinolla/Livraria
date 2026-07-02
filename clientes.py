@@ -4,6 +4,7 @@ from geral import *
 from interface import *
 from manipular_arquivos import escrever
 
+# Dicionário com campos para teste
 clientes = {
     "12345678901": {
         "nome": "Frisk",
@@ -54,9 +55,11 @@ campos = ['nome','email','telefone','endereco','nascimento','status']
 def start(arquivo,dicionario):
     alternativa = ''
     while alternativa != 0:
+        limpar()
         tela_clientes()
         menu_cliente()
-        alternativa = validar_alt(alternativa)
+        alternativa = validar_alt()
+        limpar()
         match alternativa:
             case 1: #CADASTRAR
                 tela_cadastrar()
@@ -110,11 +113,49 @@ def cadastrar(dicionario):
     }
     print()
     print('CADASTRAMENTO FEITO COM SUCESSO!')
-    return dicionario
     
 
 def atualizar(dicionario): #INCOMPLETA
-    pass 
+    alvo = input('Insira o CPF que deseja PESQUISAR no BANCO >>> ')
+    alvo = caracter_cpf(alvo) 
+    if (alvo in dicionario) and (dicionario[alvo]['status'] == True):
+        listagem(dicionario[alvo]) 
+
+        print("Caso queira manter os mesmos dados anteriores do cliente, precione enter")
+        print()
+
+        nome = atualizar_campo('Insira o novo NOME para CADASTRAR: ',dicionario[alvo]['nome'])
+        nome = validar_nome(nome)
+
+        email = atualizar_campo('Insira o novo EMAIL para CADASTRAR: ',dicionario[alvo]['email'])
+        email = validar_email(email)
+
+        telefone = atualizar_campo('Insira o novo TELEFONE para CADASTRAR: ',dicionario[alvo]['telefone'])
+        telefone = validar_telefone(telefone)
+
+        endereco = atualizar_campo('Insira o novo ENDEREÇO para CADASTRAR: ',dicionario[alvo]['endereco'])
+        endereco = validar_nome(endereco)
+
+        nascimento = atualizar_campo('Insira a nova DATA DE NASCIMENTO para CADASTRAR: ',dicionario[alvo]['nascimento'])
+        nascimento = validar_data(nascimento)
+
+        dicionario[cpf] = {
+        'cpf' : cpf,
+        'nome' : nome,
+        'email' : email,
+        'telefone' : telefone,
+        'endereco' : endereco,
+        'nascimento' : nascimento,
+        'status': True
+        }
+        print()
+        print('CADASTRAMENTO FEITO COM SUCESSO!')
+
+
+
+    else:
+        print('CPF/CLIENTE NÃO Encontrado...tente novamente!')
+
 
 def pesquisar(dicionario):
     alvo = input('Insira o CPF que deseja PESQUISAR no BANCO >>> ')
@@ -134,5 +175,4 @@ def deletar(dicionario):
         return dicionario
     else:
         print('CPF/CLIENTE NÃO Encontrado...tente novamente!')
-        return dicionario
 

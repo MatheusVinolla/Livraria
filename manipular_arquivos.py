@@ -1,26 +1,26 @@
 #   MÓDULO DE MANIPULAÇÃO DE ARQUIVOS EXTERNOS
 from os import path
 
-def start(arquivo): #VERIFICAR A EXISTÊNCIA E CRIAR O ARQUIVO
-    global dicionario_teste
+def start(arquivo,dicionario): #VERIFICAR A EXISTÊNCIA E CRIAR O ARQUIVO
 
     criacao = existe(arquivo)
     if criacao == True: #ARQUIVO EXISTENTE, VERIFICAR SE ESTÁ VAZIO 
         if vazio(arquivo):
-            escrever(arquivo,dicionario_teste)
+            escrever(arquivo,dicionario)
     elif criacao == False: #ARQUIVO NÃO EXISTENTE, CRIAR
         criar(arquivo)
-        escrever(arquivo,dicionario_teste)
+        escrever(arquivo,dicionario)
             
 
 def escrever(arquivo,dicionario):
+#   ESTILO DE ESCRITA CSV
     try:
         file = open(arquivo,'wt')
         for chave_geral in dicionario:
             linha = []
             linha.append(chave_geral) 
             for dados in dicionario[chave_geral].values():
-                linha.append(str(dados)) 
+                linha.append(str(dados)) #Aceitar valor booleano
             linha = ','.join(linha)
             linha = linha + '\n'
 
@@ -50,20 +50,20 @@ def criar(arquivo):
         mensagem_erro('CRIAÇÃO',erro)
 
 def transcrever(arquivo,lista):
+#   TRANSCRIÇÃO MODO CSV | Lista para adicionar as chaves dos campos
+#                          pois só adicionei os valores sem chaves 
     try:
         file = open(arquivo,'rt')
         dicionario = {}
         #chave,valor,valor,valor
         for linha in file:
             linha = linha.replace('\n','')
-            conteudo = linha.split(',')
-            dicionario[conteudo[0]] = {}
-            for i,campo in enumerate(conteudo[1:]):
+            conteudo = linha.split(',') #Lista com os elementos da Linha
+            dicionario[conteudo[0]] = {} #Primeiro elemento é a chave
+            for i,campo in enumerate(conteudo[1:]): #Excluindo a chave
                 dicionario[conteudo[0]][lista[i]] = campo
         file.close()
         return dicionario
-#dicionario[LIVRO E ETC] ={
-# 'categoria' : 'informação'  }                
     except Exception as erro:
         mensagem_erro('TRANSCRIÇÃO',erro)             
 
@@ -77,6 +77,8 @@ def vazio(arquivo):
         mensagem_erro('TAMANHO',erro) 
 
 def mensagem_erro(setor,erro):
+#   Caso dê algum erro que o sistema operacional proiba
+#   operações de manipulação de arquivos 
     alt = input(f"""\033[1;33m
                  !!!!  ALERTA !!!!
     {erro}
