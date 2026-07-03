@@ -134,7 +134,7 @@ def atualizar(dicionario):
         categoria = atualizar_campo('Insira a novo CATEGORIA para ATUALIZAR: ',dicionario[alvo]['categoria'])
         categoria = validar_ano(categoria)
         
-        dicionario[isbn] = {
+        dicionario[alvo] = {
         'titulo' : titulo,
         'autor' : autor,
         'ano' : ano,

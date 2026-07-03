@@ -37,15 +37,16 @@ def validar_nome(nome): #E verifica também se o nome está vazio
     return nome
 
 
-def validar_alt(num=4):
+def validar_alt(num=4,saida=True):
     alt = input('Escolha a opção que deseja acessar >>> ')
 
     aceitavel = [] #COLOCAR OS INTERVALOS ACEITOS
-    for x in range(num+1):
+    saida = 0 if (saida) else 1 #Contar o 0 [Saida] ou não
+    for x in range(saida,num+1):
         aceitavel.append(str(x))
 
     while not (alt in aceitavel):
-        alt = input('\033[31mResposta Inválida, tente novamente >>> \033[m')
+        alt = input('\033[1;31mResposta Inválida, tente novamente >>> \033[m')
     alt = int(alt)
     return alt
 
@@ -152,14 +153,26 @@ def listagem(dicionario): #Listagem especifica para função de pesquisar
     print('_'*70)
 
 
-def recolher_ano(data):
+def recolher_ano(data,normal=True):
     """
     Apenas retornar o ano de uma string
     Na forma de inteiro para cálculo
     """
-    ano = data[-4:]
+    data = str(data)
+    if normal:
+        ano = data[-4:]
+    else:
+        ano = data[:4]
     return int(ano)
 
+def calcular_data(data1, data2):
+    # Data 1 será a data entregue via o datetime onde o ano é primeiro
+    #   E também pelo dia de hoje   
+    # Data 2 será a data normal com o ano por último
+    data1 = recolher_ano(data1,False)
+    data2 = recolher_ano(data2) 
+    calculo = data1 - data2
+    return calculo
 
 def gerador_id(lista): #O ID DA NOTA FISCAL
     while True: 
@@ -173,7 +186,7 @@ def gerador_id(lista): #O ID DA NOTA FISCAL
 
 def atualizar_campo(mensagem,antigo_valor):
     novo_valor = input(f"{mensagem}")
-    if (variavel.strip()): #Variavel vazia, manter o dado anterior
+    if (len(novo_valor.strip()) == 0): #Variavel vazia, manter o dado anterior
         return antigo_valor
     else:
         return novo_valor 

@@ -1,7 +1,7 @@
 import biblioteca
 import usuarios
 import compras
-import relatorios
+from relatorios import relatorio_main
 
 import manipular_arquivos
 from interface import *
@@ -30,7 +30,7 @@ while alt_global != 0:
         case 3: #compras
             compras.start('fiscal.txt',clientes_dicio,estoque_dicio,fiscal_dicio)
         case 4: #relatorios
-            relatorios.start(estoque_dicio,clientes_dicio,fiscal_dicio)
+            relatorio_main.start(estoque_dicio,clientes_dicio,fiscal_dicio)
         case 5: #sobre
             tela_sobre()
             sobre()

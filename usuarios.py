@@ -81,7 +81,6 @@ def start(arquivo,dicionario):
                 escrever(arquivo,dicionario)
                 enter()
 
-campos = ['cpf','titulo','email','telefone','endereco','nascimento']
 
 def cadastrar(dicionario):
     cpf = input('Insira o CPF para CADASTRAR: ')
@@ -100,10 +99,8 @@ def cadastrar(dicionario):
     endereco = validar_nome(endereco)
 
     nascimento = input('Insira a DATA DE NASCIMENTO para CADASTRAR: ')
-    nascimento = validar_data(nascimento)
 
     dicionario[cpf] = {
-    'cpf' : cpf,
     'nome' : nome,
     'email' : email,
     'telefone' : telefone,
@@ -116,7 +113,7 @@ def cadastrar(dicionario):
     
 
 def atualizar(dicionario): #INCOMPLETA
-    alvo = input('Insira o CPF que deseja PESQUISAR no BANCO >>> ')
+    alvo = input('Insira o CPF que deseja ATUALIZAR no BANCO >>> ')
     alvo = caracter_cpf(alvo) 
     if (alvo in dicionario) and (dicionario[alvo]['status'] == True):
         listagem(dicionario[alvo]) 
@@ -137,10 +134,8 @@ def atualizar(dicionario): #INCOMPLETA
         endereco = validar_nome(endereco)
 
         nascimento = atualizar_campo('Insira a nova DATA DE NASCIMENTO para CADASTRAR: ',dicionario[alvo]['nascimento'])
-        nascimento = validar_data(nascimento)
 
-        dicionario[cpf] = {
-        'cpf' : cpf,
+        dicionario[alvo] = {
         'nome' : nome,
         'email' : email,
         'telefone' : telefone,
@@ -149,7 +144,7 @@ def atualizar(dicionario): #INCOMPLETA
         'status': True
         }
         print()
-        print('CADASTRAMENTO FEITO COM SUCESSO!')
+        print('ATUALIZAÇÃO FEITA COM SUCESSO!')
 
 
 

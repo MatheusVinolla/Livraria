@@ -18,9 +18,11 @@ def escrever(arquivo,dicionario):
         file = open(arquivo,'wt')
         for chave_geral in dicionario:
             linha = []
-            linha.append(chave_geral)
+            linha.append(str(chave_geral))
+
             for dados in dicionario[chave_geral].values():
-                linha.append(dados) #Aceitar valor booleano
+                linha.append(str(dados)) 
+
             linha = ','.join(linha)
             linha = linha + '\n'
 
@@ -59,8 +61,10 @@ def transcrever(arquivo,lista):
         for linha in file:
             linha = linha.replace('\n','')
             conteudo = linha.split(',') #Lista com os elementos da Linha
+
             dicionario[conteudo[0]] = {} #Primeiro elemento é a chave
             for i,campo in enumerate(conteudo[1:]): #Excluindo a chave
+                campo = converter_tipo(campo) #Função para converter os tipos de dados
                 dicionario[conteudo[0]][lista[i]] = campo
         file.close()
         return dicionario
@@ -90,5 +94,32 @@ def mensagem_erro(nome_arquivo,setor,erro):
     >>> \033[m""")
     if (alt.upper() == 'N'):
         exit()
+#######################################################
+# Função para converter um tipo entre os 4 tipos
+# primitivos mais básicos, bool, int, float, string
+# usado para parte de transcrever os dicionários
 
+def converter_tipo(dado): #True-False/ Inteiro / Float / String
+    dado = str(dado) 
+
+    if (dado.title() == 'True'): #BOOLEANO True
+        return True 
+    elif (dado.title() == 'False'): #BOOLEANO False
+        return False      
+    elif (dado.isdigit()): # INTEIRO
+        dado = int(dado)
+        return dado
+    elif (isFloat(dado)): # FLOAT
+        dado = float(dado)
+        return dado
+    else: # STRING
+        dado = str(dado)
+        return dado
+
+def isFloat(dado):
+    try:
+        dado = float(dado)
+        return True
+    except:
+        return False
 

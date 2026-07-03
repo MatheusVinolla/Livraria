@@ -181,3 +181,30 @@ def menu(): #PROVAVELMENTE TAMBÉM AINDA REMANESCENTE...
     [3] PESQUISAR
     [4] DELETAR
     [0] Sair...""")
+
+def menu_combinacao_estoque():
+    print(f"""\033[1;33m
+{'='*50}
+|   [1] TÍTULO
+|   [2] AUTOR
+|   [3] ANO
+|   [4] PREÇO
+|   [5] CATEGORIA\033[m
+    """)    
+def menu_combinacao_clientes():
+    print(f"""\033[1;33m
+{'='*50}
+|   [1] NOME
+|   [2] EMAIL
+|   [3] TELEFONE
+|   [4] ENDEREÇO
+|   [5] NASCIMENTO\033[m
+    """)    
+def menu_combinacao_compras():
+    print(f"""\033[1;33m
+{'='*50}
+|   [1] ISBN
+|   [2] DATA
+|   [3] PREÇO
+|   [4] CPF\033[m
+    """)    

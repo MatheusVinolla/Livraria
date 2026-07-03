@@ -52,13 +52,13 @@ def start(arquivo,clientes,estoque,fiscal):
 def cadastrar(clientes,livros,fiscal):
 
     cpf = input('Insira o CPF do Cliente para pesquisar: ')
-    if not(cpf in clientes):
+    if not(cpf in clientes) and (clientes[cpf]['status'] == False):
         print('CPF/Cliente não encontrado, tente novamente...')
-        return fiscal
+        return None
     isbn = input('Insira o ISBN do Livro que deseja adquirir: ')
-    if not(isbn in livros):
+    if not(isbn in livros) and (livros[isbn]['status'] == False):
         print('ISBN/Livro não encontrado, tente novamente...')
-        return fiscal
+        return None
     print('Livro encontrado!')
     confirmar = input('Deseja confirmar a compra deste livro?')
     if (confirmar[0].upper() == 'S') or (confirmar == '\n'):
