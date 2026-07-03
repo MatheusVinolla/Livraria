@@ -28,7 +28,7 @@ def tela_estoque():
     """)
     print(f'\033[1;33m{msg}\033[m',end='')
 
-def tela_cliente():
+def tela_clientes():
     msg = (r"""
  ███  █     ███ █████ █   █ █████ █████  ████ 
 █     █      █  █     ██  █   █   █     █     
@@ -120,7 +120,6 @@ def tela_sobre():
 #   MENUS UTILIZADOS NO GERAL:
 
 def menu_geral():
-    tela_inicial()
     print(f"""\033[1;33m
 {'='*50}
 |  [1] Estoque
@@ -134,8 +133,7 @@ def menu_compra():
     print(f"""\033[1;33m
 {'='*50}
 |  [1] Nova Compra
-|  [2] Histórico
-|  [3] Pesquisar
+|  [2] Pesquisar
 |  [0] Sair\033[m """)
 
 
@@ -143,8 +141,8 @@ def menu_estoque():
     print(f"""\033[1;33m
 {'='*50}
 |  [1] Cadastrar Livro
-|  [2] Pesquisar Livro
-|  [3] Atualizar Livro
+|  [2] Atualizar Livro
+|  [3] Pesquisar Livro
 |  [4] Deletar   Livro
 |  [0] Sair\033[m""")
 
@@ -153,8 +151,8 @@ def menu_cliente():
     print(f"""\033[1;33m
 {'='*50}
 |  [1] Cadastrar Cliente
-|  [2] Pesquisar Cliente
-|  [3] Atualizar Cliente
+|  [2] Atualizar Cliente
+|  [3] Pesquisar Cliente
 |  [4] Deletar   Cliente
 |  [0] Sair\033[m""")
 

@@ -39,12 +39,15 @@ def validar_nome(nome): #E verifica também se o nome está vazio
 
 def validar_alt(num=4):
     alt = input('Escolha a opção que deseja acessar >>> ')
-    aceitavel = []
+
+    aceitavel = [] #COLOCAR OS INTERVALOS ACEITOS
     for x in range(num+1):
         aceitavel.append(str(x))
+
     while not (alt in aceitavel):
         alt = input('\033[31mResposta Inválida, tente novamente >>> \033[m')
-    return int(alt)
+    alt = int(alt)
+    return alt
 
 
 def validar_float(valor):
@@ -56,12 +59,25 @@ def validar_float(valor):
             valor = input('\033[31mResposta Inválida, tente novamente >>> \033[m')
 
 
-def validar_data(data): #CONSTRUÇÃO
-    return data
+def ano_inteiro_presente(ano):
+    """
+    Função criada exclusivamente para trabalhar com o validar_ano
+    Retorna True se o valor for possível de se converter a inteiro
+    E já testa logo se o valor é menor ou igual ao ano atual
+    Retorna False no contrário
+    """
+    try:
+        ano = int(ano)
+        ano_atual = datetime.datetime.now().year      
+        if ano > ano_atual:
+            return False
+        return True
+    except:
+        return False    
 
 def validar_ano(ano):
-    ano_atual = datetime.datetime.now().year      
-    while (ano > ano_atual) and not(ano.isdigit()) and (len(ano) != 4):
+    
+    while not(ano.isdigit()) and (len(ano) != 4) and (ano_inteiro_presente(ano)):
         valor = input('\033[31mAno Inválido, tente novamente >>> \033[m')
     return ano
         
@@ -157,7 +173,7 @@ def gerador_id(lista): #O ID DA NOTA FISCAL
 
 def atualizar_campo(mensagem,antigo_valor):
     novo_valor = input(f"{mensagem}")
-    if (variavel.strip()) #Variavel vazia, manter o dado anterior
+    if (variavel.strip()): #Variavel vazia, manter o dado anterior
         return antigo_valor
     else:
         return novo_valor 

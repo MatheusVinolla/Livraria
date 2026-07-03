@@ -64,7 +64,7 @@ def cadastrar(clientes,livros,fiscal):
     if (confirmar[0].upper() == 'S') or (confirmar == '\n'):
         id_compra = gerador_id(fiscal)
         fiscal[id_compra] = {}
-        fiscal[id_compra] = ['cpf'] = cpf
+        fiscal[id_compra]['cpf'] = cpf
         fiscal[id_compra]['isbn'] = isbn 
         fiscal[id_compra]['data'] = datetime.now().replace(microsecond=0)  
         fiscal[id_compra]['preco'] = livros[isbn]['preco']   

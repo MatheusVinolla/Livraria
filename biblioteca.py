@@ -48,7 +48,7 @@ estoque = {
     }
 }
 
-campos = ['ISBN''TÍTULO','AUTOR','ANO','PREÇO','CATEGORIA']
+campos = ['titulo','autor','ano','preco','categoria','status']
 
 #################################
 
@@ -111,27 +111,27 @@ def cadastrar(dicionario):
     print()
     print('CADASTRAMENTO FEITO COM SUCESSO!')
 
-def atualizar(livros):
+def atualizar(dicionario):
     alvo = input('Insira o ISBN que deseja PESQUISAR no ESTOQUE >>> ')
-    if (alvo in livros) and (livros[alvo]['status'] == True):       
+    if (alvo in dicionario) and (dicionario[alvo]['status'] == True):       
 
         listagem(dicionario[alvo])
         print("Caso deseje manter os mesmos dados anterior, precione enter")
         print()
 
-        titulo = atualizar_campo('Insira o novo TÍTULO para ATUALIZAR: ',livros[alvo]['titulo'])   
+        titulo = atualizar_campo('Insira o novo TÍTULO para ATUALIZAR: ',dicionario[alvo]['titulo'])   
         titulo = validar_nome(titulo)
 
-        autor = atualizar_campo('Insira novo o/a AUTOR/A para ATUALIZAR: ',livros[alvo]['autor'])
+        autor = atualizar_campo('Insira novo o/a AUTOR/A para ATUALIZAR: ',dicionario[alvo]['autor'])
         autor = validar_nome(autor)
         
-        ano = atualizar_campo('Insira o novo ANO para ATUALIZAR: ',livros[alvo]['ano'])
+        ano = atualizar_campo('Insira o novo ANO para ATUALIZAR: ',dicionario[alvo]['ano'])
         ano = validar_ano(ano)
 
-        preco = atualizar_campo('Insira o novo PREÇO para ATUALIZAR: ',livros[alvo]['preco'])
+        preco = atualizar_campo('Insira o novo PREÇO para ATUALIZAR: ',dicionario[alvo]['preco'])
         preco = validar_float(preco)
 
-        categoria = atualizar_campo('Insira a novo CATEGORIA para ATUALIZAR: ',livros[alvo]['categoria'])
+        categoria = atualizar_campo('Insira a novo CATEGORIA para ATUALIZAR: ',dicionario[alvo]['categoria'])
         categoria = validar_ano(categoria)
         
         dicionario[isbn] = {

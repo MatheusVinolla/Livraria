@@ -1,6 +1,5 @@
 from interface import *
 from geral import *
-from teste import fiscal
 
 
 def start(estoque,clientes,fiscal):

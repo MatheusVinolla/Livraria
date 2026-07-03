@@ -18,9 +18,9 @@ def escrever(arquivo,dicionario):
         file = open(arquivo,'wt')
         for chave_geral in dicionario:
             linha = []
-            linha.append(chave_geral) 
+            linha.append(chave_geral)
             for dados in dicionario[chave_geral].values():
-                linha.append(str(dados)) #Aceitar valor booleano
+                linha.append(dados) #Aceitar valor booleano
             linha = ','.join(linha)
             linha = linha + '\n'
 
@@ -29,7 +29,7 @@ def escrever(arquivo,dicionario):
 
         file.close() 
     except Exception as erro:
-        mensagem_erro('ESCREVER',erro)
+        mensagem_erro(arquivo,'ESCREVER',erro)
     
     
 def existe(arquivo):
@@ -39,7 +39,7 @@ def existe(arquivo):
     except FileNotFoundError:
         return False
     except Exception as erro:
-       mensagem_erro('EXISTÊNCIA',erro) 
+       mensagem_erro(arquivo,'EXISTÊNCIA',erro) 
     
 
 
@@ -47,7 +47,7 @@ def criar(arquivo):
     try:
         file = open(arquivo,'wt')
     except Exception as erro:
-        mensagem_erro('CRIAÇÃO',erro)
+        mensagem_erro(arquivo,'CRIAÇÃO',erro)
 
 def transcrever(arquivo,lista):
 #   TRANSCRIÇÃO MODO CSV | Lista para adicionar as chaves dos campos
@@ -65,7 +65,7 @@ def transcrever(arquivo,lista):
         file.close()
         return dicionario
     except Exception as erro:
-        mensagem_erro('TRANSCRIÇÃO',erro)             
+        mensagem_erro(arquivo,'TRANSCRIÇÃO',erro)             
 
 def vazio(arquivo):
     try:
@@ -74,15 +74,15 @@ def vazio(arquivo):
         else:
             return False 
     except Exception as erro:
-        mensagem_erro('TAMANHO',erro) 
+        mensagem_erro(arquivo,'TAMANHO',erro) 
 
-def mensagem_erro(setor,erro):
+def mensagem_erro(nome_arquivo,setor,erro):
 #   Caso dê algum erro que o sistema operacional proiba
 #   operações de manipulação de arquivos 
     alt = input(f"""\033[1;33m
                  !!!!  ALERTA !!!!
     {erro}
-    HOUVE UM ERRO NA MANIPULAÇÃO DE ARQUIVOS EXTERNOS
+    HOUVE UM ERRO NA MANIPULAÇÃO DO ARQUIVO {nome_arquivo}
     O PROCEDIMENTO DE {setor} NÃO FOI FEITO COM SUCESSO
     PODENDO ACARRETAR EM PERCA DE DADOS, CONSULTE O 
     DESENVOLVER DO SISTEMA PARA MAIS DETALHES
