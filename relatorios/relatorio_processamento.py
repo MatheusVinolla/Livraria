@@ -11,7 +11,8 @@
 
 ####################################################
 
-
+import datetime
+from geral import *
 
 def estoque_processamento_moda(estoque):
     """
@@ -37,15 +38,36 @@ def estoque_processamento_moda(estoque):
         #CONTAR QUANTAS VEZES HOUVE REPETIÇÃO DA CATEGORIA
         for c in categorias_disponiveis:
             calculo = 0
+
             for isbn in copia:      #.count() para dicionario
                 if copia[isbn]['categoria'] == c:
                     calculo += 1    #Até aqui foi o contador 
+
             if calculo > maior:
                 maior = calculo
                 temp_moda.clear()
                 temp_moda.append(c)
             elif calculo == maior:
                 temp_moda.append(c)
+
+        for c in temp_moda: #JÁ ESTÁ PRONTO PERMANENTE
+            categoria_moda.append(c)
+
+        for c in temp_moda: #ELIMINAR A CATEGORIA MODA PARA CLASSIFICAR AS OUTRAS
+            for isbn in copia:
+                if copia[isbn]['categoria'] == c:
+                    temp_indices.append(isbn) #NÃO POSSO EXCLUIR UM ELEMENTO DURANTE O FOR
+                                              #Por isso tenho que fazer essa gambiarra
+        for isbn in temp_indices:
+            del copia[isbn]
+        
+        temp_indices.clear()
+        temp_moda.clear()
+    
+    #Final do Loop
+    return categoria_moda 
+
+
 
 def estoque_processamento_listar(lista_moda, estoque):
     print('='*120)

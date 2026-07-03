@@ -5,6 +5,9 @@ from interface import *
 from manipular_arquivos import escrever
 
 #Dicionário com campos de teste
+#Observação adicioneim mais campos 
+#Para testar o relatórios processamento
+#Que pega a moda das categorias
 estoque = {
     '10001': {
         'titulo': 'Noites Brancas',
@@ -45,6 +48,78 @@ estoque = {
         'preco': 49.90,
         'categoria': 'Quadrinhos',
         'status': True
+    },
+    '60006': {
+        'titulo': 'Fundação',
+        'autor': 'Isaac Asimov',
+        'ano': 2019,
+        'preco': 35.50,
+        'categoria': 'Ficção Científica',
+        'status': True
+    },
+    '70007': {
+        'titulo': 'Neuromancer',
+        'autor': 'William Gibson',
+        'ano': 2020,
+        'preco': 42.00,
+        'categoria': 'Ficção Científica',
+        'status': True
+    },
+    '80008': {
+        'titulo': '1984',
+        'autor': 'George Orwell',
+        'ano': 2018,
+        'preco': 29.90,
+        'categoria': 'Ficção Científica',
+        'status': True
+    },
+    '90009': {
+        'titulo': 'Orgulho e Preconceito',
+        'autor': 'Jane Austen',
+        'ano': 2016,
+        'preco': 19.90,
+        'categoria': 'Romance',
+        'status': True
+    },
+    '11111': {
+        'titulo': 'Dom Casmurro',
+        'autor': 'Machado de Assis',
+        'ano': 2020,
+        'preco': 15.50,
+        'categoria': 'Romance',
+        'status': True
+    },
+    '22222': {
+        'titulo': 'Drácula',
+        'autor': 'Bram Stoker',
+        'ano': 2022,
+        'preco': 25.00,
+        'categoria': 'Terror',
+        'status': True
+    },
+    '33333': {
+        'titulo': 'O Hobbit',
+        'autor': 'J.R.R. Tolkien',
+        'ano': 2021,
+        'preco': 40.00,
+        'categoria': 'Fantasia',
+        'status': True
+    },
+    '44444': {
+        'titulo': 'Harry Potter',
+        'autor': 'J.K. Rowling',
+        'ano': 2019,
+        'preco': 35.00,
+        'categoria': 'Fantasia',
+        'status': True
+    },
+    '55555': {
+        'titulo': 'Armas e Germes',
+        'autor': 'Jared Diamond',
+        'ano': 2014,
+        'preco': 60.00,
+        'categoria': 'História',
+        'status': False 
     }
 }
 
