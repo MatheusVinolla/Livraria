@@ -76,10 +76,10 @@ def clientes_combinacao(clientes,alt):
             filtro = 'endereco'
             tam = 30
         case 5: #NASCIMENTO
-            espaco_campo = (f"{' ':^10} |*|")
-            cabecalho_campo = (f"{'NASCIMENTO':^10} |*|")
+            espaco_campo = (f"{' ':^12} |*|")
+            cabecalho_campo = (f"{'NASCIMENTO':^12} |*|")
             filtro = 'nascimento'
-            tam = 10
+            tam = 12
     titulo = cabecalho_cpf + cabecalho_campo
     print(titulo)
 

@@ -59,10 +59,12 @@ def validar_float(valor):
         except:
             valor = input('\033[31mResposta Inválida, tente novamente >>> \033[m')
 
+#################################################
+#   DATA Apenas    
 
 def ano_inteiro_presente(ano):
     """
-    Função criada exclusivamente para trabalhar com o validar_ano
+    Função criada para trabalhar com o validar_ano
     Retorna True se o valor for possível de se converter a inteiro
     E já testa logo se o valor é menor ou igual ao ano atual
     Retorna False no contrário
@@ -76,12 +78,55 @@ def ano_inteiro_presente(ano):
     except:
         return False    
 
-def validar_ano(ano):
-    
+def validar_ano(ano): #Função para validar o ano para cadastrar um livro...
     while not(ano.isdigit()) and (len(ano) != 4) and (ano_inteiro_presente(ano)):
         valor = input('\033[31mAno Inválido, tente novamente >>> \033[m')
     return ano
-        
+
+def formatar_data(data): #Tira caracteres que o usuário pode digitar na data
+    data = data.strip()
+    data = data.replace('\\','')       
+    data = data.replace(',','')
+    data = data.replace('-','') 
+    data = data.replace('.','')   
+    data = data.replace(' ','')   
+    data = data.replace(':','')  
+    data = data.replace(';','')  
+    data = data.replace('_','')
+    data = data.replace('|','')
+    data = data.replace('/','')
+    return data
+
+def caracter_data(data): #Verificar se há letra
+    for letra in data:
+        if not(letra.isdigit()):
+            return False
+
+def validar_setor_data(data):
+    ano = int(data[-4:])
+    mes = int(data[2:4])
+    dia = int(data[:2])
+    # validar ano
+    if not(ano_inteiro_presente(ano)):
+        return False 
+    # validar mes
+    if ((mes < 0) or (mes > 12)):
+        return False 
+    # validadar dia 
+    if ((dia < 0) or (dia > 31)):
+       return False 
+    return True
+
+def validar_data(data):
+    data = str(data)
+    data = formatar_data(data)
+    while not(len(data) == 8) and not(caracter_data(data)) and not(validar_setor_data(data)):
+        data = input('\033[31mData Inválida, tente novamente >>> \033[m')
+        data = formatar_data(data)         
+    
+    data = data[:2] + '/' + data[2:4] + '/' + data[4:]  
+    return data
+    #28/01/2008
 
 ####################################################
 #   CPF Apenas
@@ -173,6 +218,7 @@ def calcular_data(data1, data2):
     data2 = recolher_ano(data2) 
     calculo = data1 - data2
     return calculo
+
 
 def gerador_id(lista): #O ID DA NOTA FISCAL
     while True: 

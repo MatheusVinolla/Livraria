@@ -11,7 +11,7 @@ clientes = {
         "email": "frisk.determinado@undertale.com",
         "telefone": "11999990001",
         "endereco": "Ruínas Sala do Trono",
-        "nascimento": "15092015",
+        "nascimento": "15/09/2015",
         "status": True,
     },
     "23456789012": {
@@ -19,7 +19,7 @@ clientes = {
         "email": "sans.badtime@undertale.com",
         "telefone": "13988880002",
         "endereco": "Nevadal Casa dos Irmãos",
-        "nascimento": "01041995",
+        "nascimento": "01/04/1995",
         "status": True,
     },
     "34567890123": {
@@ -27,7 +27,7 @@ clientes = {
         "email": "great.papyrus@undertale.com",
         "telefone": "13988880003",
         "endereco": "Nevada Guarda Real",
-        "nascimento": "22071997",
+        "nascimento": "22/07/1997",
         "status": True,
     },
     "45678901234": {
@@ -35,7 +35,7 @@ clientes = {
         "email": "toriel.mae@undertale.com",
         "telefone": "11977770004",
         "endereco": "Ruínas Casa da Toriel",
-        "nascimento": "08031980",
+        "nascimento": "08/03/1980",
         "status": True,
     },
     "56789012345": {
@@ -43,12 +43,12 @@ clientes = {
         "email": "undyne.ngahhh@undertale.com",
         "telefone": "21966660005",
         "endereco": "Cachoeira Casa do Peixe",
-        "nascimento": "12111992",
+        "nascimento": "12/11/1992",
         "status": True,
     }
 }
 
-campos = ['nome','email','telefone','endereco','nascimento','status']
+campos = ('nome','email','telefone','endereco','nascimento','status')
 
 ###########################################
 
@@ -85,32 +85,35 @@ def start(arquivo,dicionario):
 def cadastrar(dicionario):
     cpf = input('Insira o CPF para CADASTRAR: ')
     cpf = validar_cpf(cpf)
-
-    nome = input('Insira o NOME para CADASTRAR: ')
-    nome = validar_nome(nome)
-
-    email = input('Insira o EMAIL para CADASTRAR: ')
-    email = validar_email(email)
-
-    telefone = input('Insira o TELEFONE para CADASTRAR: ')
-    telefone = validar_telefone(telefone)
-
-    endereco = input('Insira o ENDEREÇO para CADASTRAR: ')
-    endereco = validar_nome(endereco)
-
-    nascimento = input('Insira a DATA DE NASCIMENTO para CADASTRAR: ')
-
-    dicionario[cpf] = {
-    'nome' : nome,
-    'email' : email,
-    'telefone' : telefone,
-    'endereco' : endereco,
-    'nascimento' : nascimento,
-    'status': True
-    }
-    print()
-    print('CADASTRAMENTO FEITO COM SUCESSO!')
     
+    if not(cpf in dicionario):
+        nome = input('Insira o NOME para CADASTRAR: ')
+        nome = validar_nome(nome)
+
+        email = input('Insira o EMAIL para CADASTRAR: ')
+        email = validar_email(email)
+
+        telefone = input('Insira o TELEFONE para CADASTRAR: ')
+        telefone = validar_telefone(telefone)
+
+        endereco = input('Insira o ENDEREÇO para CADASTRAR: ')
+        endereco = validar_nome(endereco)
+
+        nascimento = input('Insira a DATA DE NASCIMENTO para CADASTRAR: ')
+        nascimento = validar_data(nascimento) 
+
+        dicionario[cpf] = {
+        'nome' : nome,
+        'email' : email,
+        'telefone' : telefone,
+        'endereco' : endereco,
+        'nascimento' : nascimento,
+        'status': True
+        }
+        print()
+        print('CADASTRAMENTO FEITO COM SUCESSO!')
+    else:
+        print('CPF já cadastrado no sistema, por favor tente novamente...') 
 
 def atualizar(dicionario): #INCOMPLETA
     alvo = input('Insira o CPF que deseja ATUALIZAR no BANCO >>> ')

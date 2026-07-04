@@ -123,7 +123,7 @@ estoque = {
     }
 }
 
-campos = ['titulo','autor','ano','preco','categoria','status']
+campos = ('titulo','autor','ano','preco','categoria','status')
 
 #################################
 
@@ -159,32 +159,35 @@ def start(arquivo,dicionario):
 
 def cadastrar(dicionario):
     isbn = input('Insira o ISBN para CADASTRAR: ')
+    if not(isbn in dicionario):
+        titulo = input('Insira o TÍTULO para CADASTRAR: ')   
+        titulo = validar_nome(titulo)
 
-    titulo = input('Insira o TÍTULO para CADASTRAR: ')   
-    titulo = validar_nome(titulo)
+        autor = input('Insira o/a AUTOR/A para CADASTRAR: ')
+        autor = validar_nome(autor)
+        
+        ano = input('Insira o ANO para CADASTRAR: ')
+        ano = validar_ano(ano)
 
-    autor = input('Insira o/a AUTOR/A para CADASTRAR: ')
-    autor = validar_nome(autor)
-    
-    ano = input('Insira o ANO para CADASTRAR: ')
-    ano = validar_ano(ano)
+        preco = input('Insira o PREÇO para CADASTRAR: ')
+        preco = validar_float(preco)
 
-    preco = input('Insira o PREÇO para CADASTRAR: ')
-    preco = validar_float(preco)
+        categoria = input('Insira a CATEGORIA para CADASTRAR: ')
+        categoria = validar_ano(categoria)
+        
+        dicionario[isbn] = {
+        'titulo' : titulo,
+        'autor' : autor,
+        'ano' : ano,
+        'preco' : preco,
+        'categoria' : categoria,
+        'status' : True
+        }
+        print()
+        print('CADASTRAMENTO FEITO COM SUCESSO!')
+    else:
+        print('ISBN já cadastrado no sistema, por favor tente novamente...')
 
-    categoria = input('Insira a CATEGORIA para CADASTRAR: ')
-    categoria = validar_ano(categoria)
-    
-    dicionario[isbn] = {
-    'titulo' : titulo,
-    'autor' : autor,
-    'ano' : ano,
-    'preco' : preco,
-    'categoria' : categoria,
-    'status' : True
-    }
-    print()
-    print('CADASTRAMENTO FEITO COM SUCESSO!')
 
 def atualizar(dicionario):
     alvo = input('Insira o ISBN que deseja PESQUISAR no ESTOQUE >>> ')
