@@ -55,6 +55,7 @@ def start(arquivo,clientes,estoque,fiscal):
 def cadastrar(clientes,livros,fiscal):
 
     cpf = input('Insira o CPF do Cliente para pesquisar: ')
+    cpf = caracter_cpf(cpf)
     if not(cpf in clientes) or (clientes[cpf]['status'] == False):
         print('CPF/Cliente não encontrado, tente novamente...')
         return None

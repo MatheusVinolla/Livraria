@@ -14,13 +14,15 @@ def caracter_telefone(tel):
     tel = tel.replace(' ','')
     tel = tel.replace('(','')
     tel = tel.replace(')','')
+    tel = tel.replace('.','')
     return tel 
 
 
 def validar_telefone(tel):
     tel = caracter_telefone(tel) 
-    while not(len(tel) != 11) and not(tel.isdigit()):
+    while not(len(tel) == 11) or not(tel.isdigit()):
         tel = input('\033[31mNúmero Inválido, tente novamente >>> \033[m')
+        tel = caracter_telefone(tel)
     return tel
 
 def formatar_tel(tel):
@@ -93,7 +95,7 @@ def validar_ano(ano): #Função para validar o ano para cadastrar um livro...
         valor = input('\033[31mAno Inválido, tente novamente >>> \033[m')
     return ano
 
-def formatar_data(data): #Tira caracteres que o usuário pode digitar na data
+def caracter_data(data): #Tira caracteres que o usuário pode digitar na data
     data = data.strip()
     data = data.replace('\\','')       
     data = data.replace(',','')
@@ -107,10 +109,11 @@ def formatar_data(data): #Tira caracteres que o usuário pode digitar na data
     data = data.replace('/','')
     return data
 
-def caracter_data(data): #Verificar se há letra
+def numeros_data(data): #Verificar se há letra
     for letra in data:
         if not(letra.isdigit()):
             return False
+    return True
 
 def validar_setor_data(data):
     ano = int(data[-4:])
@@ -129,10 +132,10 @@ def validar_setor_data(data):
 
 def validar_data(data):
     data = str(data)
-    data = formatar_data(data) #Tira os caracteres não números /-.
-    while not(len(data) == 8) and not(caracter_data(data)) and not(validar_setor_data(data)):
+    data = caracter_data(data) #Tira os caracteres não números /-.
+    while not(len(data) == 8) or not(numeros_data(data)) or not(validar_setor_data(data)):
         data = input('\033[31mData Inválida, tente novamente >>> \033[m')
-        data = formatar_data(data)         
+        data = caracter_data(data)         
     
     data = data[:2] + '/' + data[2:4] + '/' + data[4:]  
     return data
@@ -155,6 +158,7 @@ def data_brasileira(data):
 ####################################################
 #   CPF Apenas
 def caracter_cpf(cpf):
+    cpf = str(cpf)
     cpf = cpf.replace(',','')
     cpf = cpf.replace('-','') 
     cpf = cpf.replace('.','')   
@@ -166,6 +170,7 @@ def validar_cpf(cpf):
     cpf = caracter_cpf(cpf)
     while not(cpf_valido(cpf)):
         cpf = input('\033[31mCPF Inválido, tente novamente >>> \033[m')
+        cpf = caracter_cpf(cpf)
     return cpf
 
 

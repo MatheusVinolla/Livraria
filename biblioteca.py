@@ -210,7 +210,7 @@ def atualizar(dicionario):
         preco = validar_float(preco)
 
         categoria = atualizar_campo('Insira a novo CATEGORIA para ATUALIZAR: ',dicionario[alvo]['categoria'])
-        categoria = validar_ano(categoria)
+        categoria = validar_nome(categoria)
         
         dicionario[alvo] = {
         'titulo' : titulo,
