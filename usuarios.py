@@ -8,7 +8,7 @@ from manipular_arquivos import escrever
 clientes = {
     "12345678901": {
         "nome": "Frisk",
-        "email": "frisk.determinado@undertale.com",
+        "email": "frisk.hope@undertale.com",
         "telefone": "11999990001",
         "endereco": "Ruínas Sala do Trono",
         "nascimento": "15/09/2015",

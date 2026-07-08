@@ -71,7 +71,7 @@ def ano_inteiro_presente(ano):
     """
     try:
         ano = int(ano)
-        ano_atual = datetime.datetime.now().year      
+        ano_atual = int(datetime.datetime.now().year)
         if ano > ano_atual:
             return False
         return True
@@ -79,7 +79,7 @@ def ano_inteiro_presente(ano):
         return False    
 
 def validar_ano(ano): #Função para validar o ano para cadastrar um livro...
-    while not(ano.isdigit()) and (len(ano) != 4) and (ano_inteiro_presente(ano)):
+    while (len(ano) != 4) and not(ano_inteiro_presente(ano)):
         valor = input('\033[31mAno Inválido, tente novamente >>> \033[m')
     return ano
 
@@ -119,7 +119,7 @@ def validar_setor_data(data):
 
 def validar_data(data):
     data = str(data)
-    data = formatar_data(data)
+    data = formatar_data(data) #Tira os caracteres não números /-.
     while not(len(data) == 8) and not(caracter_data(data)) and not(validar_setor_data(data)):
         data = input('\033[31mData Inválida, tente novamente >>> \033[m')
         data = formatar_data(data)         
@@ -127,6 +127,20 @@ def validar_data(data):
     data = data[:2] + '/' + data[2:4] + '/' + data[4:]  
     return data
     #28/01/2008
+
+def data_brasileira(data):
+    """
+    Pega o valor dado pela data do datetime
+    E transforma ao padrão brasileiro... 
+    """
+    
+    data = str(data) #2026-01-23 #ano, mes, dia
+    ano = data[:4]
+    mes = data[5:7]
+    dia = data[-2:]
+    data = dia + '/' + mes + '/' + ano    
+    return data
+
 
 ####################################################
 #   CPF Apenas
@@ -174,6 +188,19 @@ def cpf_valido(cpf):
     
     return True  
 
+
+def formatar_cpf(cpf):
+    cpf = str(cpf) #099.412.224.10
+    final = ''
+    for i,num in enumerate(cpf):
+        final += str(num)
+        if ((i != 0) and ((i + 1) % 3) == 0):
+            final += '.' 
+    return final
+    
+        
+
+
 ####################################
 #   Funções Gerais
 
@@ -189,9 +216,10 @@ def enter():
     input(' Digite ENTER para continuar '.center(50,"="))
 
 
-def listagem(dicionario): #Listagem especifica para função de pesquisar
+def listagem(dicionario,compras=False): #Listagem especifica para função de pesquisar
     copia = dicionario.copy()
-    del copia['status']
+    if not(compras): #COMPRAS NÃO TEM STATUS, ENTÃO DÁ ERRO
+        del copia['status']
     print('_'*70) 
     for nome,valor in copia.items():
         print(f': {nome.title():^20} |*| {valor:<20}')

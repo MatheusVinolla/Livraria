@@ -130,7 +130,7 @@ def menu_compras_filtro(fiscal):
 def compras_filtro(fiscal,menu_anos):
     #[21,22,33,44,55,11,00]
     for i,num in enumerate(menu_anos):
-        print(f'\t[{i+1}] [{num}]',end='')
+        print(f'\t[{i+1}] [{num}]')
     print()
 
     #VALIDADOR RÁPIDO 
@@ -149,7 +149,7 @@ def compras_filtro(fiscal,menu_anos):
     limpar()
 
     print('='*80)
-    print(f"     |*| {'NOTA FISCAL':^11} |*| {'ISBN':^5} |*| {'DATA':^10} |*| {'PREÇO':^5} |*| {'CPF':^11} |*|")
+    print(f"     |*| {'NOTA FISCAL':^11} |*| {'ISBN':^5} |*| {'DATA':^10} |*| {'PREÇO':^5} |*| {'CPF':^14} |*|")
 
     for nota in fiscal:
         ano_nota = recolher_ano(fiscal[nota]['data'])
@@ -158,8 +158,8 @@ def compras_filtro(fiscal,menu_anos):
             tudo.append(nota)
             for c in fiscal[nota].values():
                 tudo.append(c)
-            print(f"     |*| {' ':^11} |*| {' ':^5} |*| {' ':^10} |*| {' ':^5} |*| {' ':^11} |*|")
-            print(f"     |*| {tudo[0]:^11} |*| {tudo[1]:^5} |*| {tudo[2]:^10} |*| {tudo[3]:^5} |*| {tudo[4]:^11} |*|")
+            print(f"     |*| {' ':^11} |*| {' ':^5} |*| {' ':^10} |*| {' ':^5} |*| {' ':^14} |*|")
+            print(f"     |*| {tudo[0]:^11} |*| {tudo[1]:^5} |*| {tudo[2]:^10} |*| {tudo[3]:^5} |*| {formatar_cpf(tudo[4]):^14} |*|")
     print('='*80)
 
 

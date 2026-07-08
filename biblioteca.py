@@ -74,8 +74,8 @@ estoque = {
         'status': True
     },
     '90009': {
-        'titulo': 'Orgulho e Preconceito',
-        'autor': 'Jane Austen',
+        'titulo': 'Amor e Gelato',
+        'autor': 'Jenna Evans',
         'ano': 2016,
         'preco': 19.90,
         'categoria': 'Romance',
@@ -158,7 +158,7 @@ def start(arquivo,dicionario):
 
 
 def cadastrar(dicionario):
-    isbn = input('Insira o ISBN para CADASTRAR: ')
+    isbn = input('Insira o ISBN para CADASTRAR >>> ')
     if not(isbn in dicionario):
         titulo = input('Insira o TÍTULO para CADASTRAR: ')   
         titulo = validar_nome(titulo)
@@ -173,7 +173,7 @@ def cadastrar(dicionario):
         preco = validar_float(preco)
 
         categoria = input('Insira a CATEGORIA para CADASTRAR: ')
-        categoria = validar_ano(categoria)
+        categoria = validar_nome(categoria)
         
         dicionario[isbn] = {
         'titulo' : titulo,

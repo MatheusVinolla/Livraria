@@ -23,6 +23,14 @@ def estoque_processamento_moda(estoque):
     copia = estoque.copy()
     categorias_disponiveis = []
 
+    indices_deletar = []
+    for isbn in copia: #REMOVER OS LIVROS DADOS COM FALSE NO SOFT DELETE NA CONTAGEM DA MODA
+        if copia[isbn]['status'] == False:
+             indices_deletar.append(isbn)
+    for i in indices_deletar:
+        del copia[i]
+    
+
     for isbn in copia: #COLOCAR TODAS AS CATEGORIAS DISPONIVEIS
         cat = copia[isbn]['categoria']
         if not(cat in categorias_disponiveis):
@@ -90,7 +98,7 @@ def estoque_processamento_listar(lista_moda, estoque):
 
 def clientes_processamento(clientes):
     print('='*145)
-    print(f"|*| {'CPF':^11} |*| {'NOME':^20} |*| {'EMAIL':^30} |*| {'TELEFONE':^11} |*| {'ENDEREÇO':^30} |*| {'NASCIMENTO':^12} |*|")
+    print(f"|*| {'CPF':^14} |*| {'NOME':^20} |*| {'EMAIL':^30} |*| {'TELEFONE':^11} |*| {'ENDEREÇO':^30} |*| {'NASCIMENTO':^12} |*|")
 
     for cpf in clientes:
         data = datetime.date.today()
@@ -100,8 +108,8 @@ def clientes_processamento(clientes):
             tudo.append(cpf)
             for c in clientes[cpf].values():
                 tudo.append(c)
-            print(f"|*| {' ':^11} |*| {' ':^20} |*| {' ':^30} |*| {' ':^11} |*| {' ':^30} |*| {' ':^12} |*|")
-            print(f"|*| {tudo[0]:^11} |*| {tudo[1]:^20} |*| {tudo[2]:^30} |*| {tudo[3]:^11} |*| {tudo[4]:^30} |*| {tudo[5]:^12} |*|")
+            print(f"|*| {' ':^14} |*| {' ':^20} |*| {' ':^30} |*| {' ':^11} |*| {' ':^30} |*| {' ':^12} |*|")
+            print(f"|*| {formatar_cpf(tudo[0]):^14} |*| {tudo[1]:^20} |*| {tudo[2]:^30} |*| {tudo[3]:^11} |*| {tudo[4]:^30} |*| {tudo[5]:^12} |*|")
 
     print('='*145)
 
@@ -121,7 +129,7 @@ def compras_processamento_preco(fiscal):
     while len(copia) > 0:
         maior = -1
         for notas in copia:
-            preco_nota = copia[notas]['preco']
+            preco_nota = float(copia[notas]['preco'])
             if preco_nota > maior:
                 maior = preco_nota
                 indices.clear()
@@ -137,15 +145,15 @@ def compras_processamento_preco(fiscal):
 
 def compras_processamento_listagem(indices,fiscal):
     print('='*80)
-    print(f"     |*| {'NOTA FISCAL':^11} |*| {'ISBN':^5} |*| {'DATA':^10} |*| {'PREÇO':^5} |*| {'CPF':^11} |*|")
+    print(f"     |*| {'NOTA FISCAL':^11} |*| {'ISBN':^5} |*| {'DATA':^10} |*| {'PREÇO':^5} |*| {'CPF':^14} |*|")
 
     for i in indices:
         tudo = []
         tudo.append(i)
         for c in fiscal[i].values():
             tudo.append(c)
-        print(f"     |*| {' ':^11} |*| {' ':^5} |*| {' ':^10} |*| {' ':^5} |*| {' ':^11} |*|")
-        print(f"     |*| {tudo[0]:^11} |*| {tudo[1]:^5} |*| {tudo[2]:^10} |*| {tudo[3]:^5} |*| {tudo[4]:^11} |*|")
+        print(f"     |*| {' ':^11} |*| {' ':^5} |*| {' ':^10} |*| {' ':^5} |*| {' ':^14} |*|")
+        print(f"     |*| {tudo[0]:^11} |*| {tudo[1]:^5} |*| {tudo[2]:^10} |*| {tudo[3]:^5} |*| {formatar_cpf(tudo[4]):^14} |*|")
 
     print('='*80)
 

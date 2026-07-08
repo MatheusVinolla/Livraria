@@ -1,6 +1,6 @@
 from interface import *
 from geral import *
-from datetime import datetime
+import datetime
 from manipular_arquivos import escrever
 
 # Dicionário teste conectando o de ESTOQUE com CLIENTES
@@ -36,6 +36,7 @@ campos = ['isbn','data','preco','cpf']
 def start(arquivo,clientes,estoque,fiscal):
     alternativa = ''
     while alternativa != 0:
+        limpar()
         tela_compra()
         menu_compra()
         alternativa = validar_alt(2)
@@ -45,38 +46,46 @@ def start(arquivo,clientes,estoque,fiscal):
                 tela_cadastrar()
                 cadastrar(clientes,estoque,fiscal)
                 escrever(arquivo,fiscal)
+                enter()
             case 2:  #PESQUISAR
                 tela_pesquisar()
                 pesquisar(fiscal)
+                enter()
 
 def cadastrar(clientes,livros,fiscal):
 
     cpf = input('Insira o CPF do Cliente para pesquisar: ')
-    if not(cpf in clientes) and (clientes[cpf]['status'] == False):
+    if not(cpf in clientes) or (clientes[cpf]['status'] == False):
         print('CPF/Cliente não encontrado, tente novamente...')
         return None
+    print(f'CPF/Cliente encontrado! Bem-vindo {clientes[cpf]["nome"]}')
     isbn = input('Insira o ISBN do Livro que deseja adquirir: ')
-    if not(isbn in livros) and (livros[isbn]['status'] == False):
+    if not(isbn in livros) or (livros[isbn]['status'] == False):
         print('ISBN/Livro não encontrado, tente novamente...')
         return None
-    print('Livro encontrado!')
-    confirmar = input('Deseja confirmar a compra deste livro?')
+    print(f'ISBN/Livro encontrado! Título {livros[isbn]["titulo"]}')
+    confirmar = input('Deseja confirmar a compra deste livro [S/N]? ')
     if (confirmar[0].upper() == 'S') or (confirmar == '\n'):
         id_compra = gerador_id(fiscal)
         fiscal[id_compra] = {}
-        fiscal[id_compra]['cpf'] = cpf
         fiscal[id_compra]['isbn'] = isbn 
-        fiscal[id_compra]['data'] = datetime.now().replace(microsecond=0)  
+        fiscal[id_compra]['data'] = data_brasileira(datetime.date.today())
         fiscal[id_compra]['preco'] = livros[isbn]['preco']   
+        fiscal[id_compra]['cpf'] = cpf
+
+        print() 
+        print('COMPRA EFETUADA COM SUCESSO!')
+        print(f'O ID GERADO DA COMPRA É: {id_compra}')
+
     else:
         print('Ok, caso mude de escolha, saiba que estou aqui') 
 
 def pesquisar(fiscal):
-    id_compra = input('Insira o ID DA COMPRA para pesquisar:') 
+    id_compra = input('Insira o ID DA COMPRA para pesquisar: ') 
     if not(id_compra in fiscal):
         print('ID DA COMPRA não encontrado no banco fiscal...')
         print('Faça uma compra no modo de cadastrar')
         print('Para adicionar uma nova nota fiscal no banco fiscal da livraria')
     else:
         print('ID DA COMPRA encontrado com sucesso!')
-        listagem(fiscal[id_compra])    
+        listagem(fiscal[id_compra],True)    

@@ -3,6 +3,7 @@
 #   Listagem COM COMBINAÇÃO DE DADOS dos Relatórios
 
 ##################################################
+from geral import *
 
 def estoque_combinacao(estoque,alt):
     cabecalho_isbn = (f"     |*| {'ISBN':^5} |*| ")
@@ -52,8 +53,8 @@ def estoque_combinacao(estoque,alt):
 
 
 def clientes_combinacao(clientes,alt):
-        # print(f"|*| {'CPF':^11} |*| {'NOME':^20} |*| {'EMAIL':^30} |*| {'TELEFONE':^11} |*| {'ENDEREÇO':^30} |*| {'NASCIMENTO':^10} |*|")
-    cabecalho_cpf = (f"     |*| {'CPF':^11} |*| ")
+        # print(f"|*| {'CPF':^14} |*| {'NOME':^20} |*| {'EMAIL':^30} |*| {'TELEFONE':^11} |*| {'ENDEREÇO':^30} |*| {'NASCIMENTO':^10} |*|")
+    cabecalho_cpf = (f"     |*| {'CPF':^14} |*| ")
     match alt:
         case 1: #NOME
             espaco_campo = (f"{' ':^20} |*|")
@@ -83,13 +84,13 @@ def clientes_combinacao(clientes,alt):
     titulo = cabecalho_cpf + cabecalho_campo
     print(titulo)
 
-    espaco_inicial = (f"     |*| {' ':^11} |*| ")
+    espaco_inicial = (f"     |*| {' ':^14} |*| ")
     espaco_final = espaco_inicial + espaco_campo
 
     for cpf in clientes:
         if clientes[cpf]['status'] == True:
             print(espaco_final)
-            texto_isbn = (f"     |*| {cpf:^11} |*| ")
+            texto_isbn = (f"     |*| {formatar_cpf(cpf):^14} |*| ")
             texto_campo = (f"{clientes[cpf][filtro]}".center(tam))
             texto_bonito = " |*|"
             texto_final = texto_isbn + texto_campo + texto_bonito
@@ -117,10 +118,10 @@ def compras_combinacao(fiscal,alt):
             filtro = 'preco'
             tam = 5
         case 4: #CPF
-            espaco_campo = (f"{' ':^11} |*|")
-            cabecalho_campo = (f"{'CPF':^11} |*|")
+            espaco_campo = (f"{' ':^14} |*|")
+            cabecalho_campo = (f"{'CPF':^14} |*|")
             filtro = 'cpf'
-            tam = 11
+            tam = 14
 
 
     titulo = cabecalho_id_compra + cabecalho_campo
