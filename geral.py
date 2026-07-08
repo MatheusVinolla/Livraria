@@ -23,6 +23,16 @@ def validar_telefone(tel):
         tel = input('\033[31mNúmero Inválido, tente novamente >>> \033[m')
     return tel
 
+def formatar_tel(tel):
+    #84999146181
+    #(84) 9 9914-6181
+    tel = str(tel)
+    ddd = '(' + tel[:2] + ')' + ' '
+    num = tel[2:]
+    num1 = num[1:5] + '-' + num[5:]
+    todo = ddd + num1
+    return todo
+    
 
 def caracter_nome(nome): #Verifica se tem algum número
     for letra in nome:

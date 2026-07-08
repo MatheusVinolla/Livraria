@@ -98,7 +98,7 @@ def estoque_processamento_listar(lista_moda, estoque):
 
 def clientes_processamento(clientes):
     print('='*145)
-    print(f"|*| {'CPF':^14} |*| {'NOME':^20} |*| {'EMAIL':^30} |*| {'TELEFONE':^11} |*| {'ENDEREÇO':^30} |*| {'NASCIMENTO':^12} |*|")
+    print(f"|*| {'CPF':^14} |*| {'NOME':^20} |*| {'EMAIL':^30} |*| {'TELEFONE':^15} |*| {'ENDEREÇO':^30} |*| {'NASCIMENTO':^12} |*|")
 
     for cpf in clientes:
         data = datetime.date.today()
@@ -108,8 +108,8 @@ def clientes_processamento(clientes):
             tudo.append(cpf)
             for c in clientes[cpf].values():
                 tudo.append(c)
-            print(f"|*| {' ':^14} |*| {' ':^20} |*| {' ':^30} |*| {' ':^11} |*| {' ':^30} |*| {' ':^12} |*|")
-            print(f"|*| {formatar_cpf(tudo[0]):^14} |*| {tudo[1]:^20} |*| {tudo[2]:^30} |*| {tudo[3]:^11} |*| {tudo[4]:^30} |*| {tudo[5]:^12} |*|")
+            print(f"|*| {' ':^14} |*| {' ':^20} |*| {' ':^30} |*| {' ':^15} |*| {' ':^30} |*| {' ':^12} |*|")
+            print(f"|*| {formatar_cpf(tudo[0]):^14} |*| {tudo[1]:^20} |*| {tudo[2]:^30} |*| {formatar_tel(tudo[3]):^15} |*| {tudo[4]:^30} |*| {tudo[5]:^12} |*|")
 
     print('='*145)
 

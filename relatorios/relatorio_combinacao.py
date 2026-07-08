@@ -67,10 +67,10 @@ def clientes_combinacao(clientes,alt):
             filtro = 'email'
             tam = 30
         case 3: #TELEFONE
-            espaco_campo = (f"{' ':^11} |*|")
-            cabecalho_campo = (f"{'TELEFONE':^11} |*|")
+            espaco_campo = (f"{' ':^15} |*|")
+            cabecalho_campo = (f"{'TELEFONE':^15} |*|")
             filtro = 'telefone'
-            tam = 11
+            tam = 15
         case 4: #ENDEREÇO
             espaco_campo = (f"{' ':^30} |*|")
             cabecalho_campo = (f"{'ENDEREÇO':^30} |*|")
@@ -91,7 +91,10 @@ def clientes_combinacao(clientes,alt):
         if clientes[cpf]['status'] == True:
             print(espaco_final)
             texto_isbn = (f"     |*| {formatar_cpf(cpf):^14} |*| ")
-            texto_campo = (f"{clientes[cpf][filtro]}".center(tam))
+            if filtro == 'telefone':
+                texto_campo = (f"{formatar_tel(clientes[cpf][filtro])}".center(tam))
+            else:
+                texto_campo = (f"{clientes[cpf][filtro]}".center(tam))
             texto_bonito = " |*|"
             texto_final = texto_isbn + texto_campo + texto_bonito
             print(texto_final)
@@ -133,7 +136,10 @@ def compras_combinacao(fiscal,alt):
     for id_compra in fiscal:
         print(espaco_final)
         texto_id_compra = (f"     |*| {id_compra:^11} |*| ")
-        texto_campo = (f"{fiscal[id_compra][filtro]}".center(tam))
+        if filtro == 'cpf':
+            texto_campo = (f"{formatar_cpf(fiscal[id_compra][filtro])}".center(tam))
+        else:
+            texto_campo = (f"{fiscal[id_compra][filtro]}".center(tam))
         texto_bonito = " |*|"
         texto_final = texto_id_compra+ texto_campo + texto_bonito
         print(texto_final)

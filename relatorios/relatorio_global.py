@@ -28,8 +28,8 @@ def estoque_global(estoque,valor_verdade=True):
 ############################################################
 
 def clientes_global(clientes,valor_verdade=True):
-    print('='*145) #099.412.224.10
-    print(f"|*| {'CPF':^14} |*| {'NOME':^20} |*| {'EMAIL':^30} |*| {'TELEFONE':^11} |*| {'ENDEREÇO':^30} |*| {'NASCIMENTO':^12} |*|")
+    print('='*145) #099.412.224.10 #(84) 99914-6181
+    print(f"|*| {'CPF':^14} |*| {'NOME':^20} |*| {'EMAIL':^30} |*| {'TELEFONE':^15} |*| {'ENDEREÇO':^30} |*| {'NASCIMENTO':^12} |*|")
 
     for cpf in clientes:
         if clientes[cpf]['status'] == valor_verdade:
@@ -37,8 +37,8 @@ def clientes_global(clientes,valor_verdade=True):
             tudo.append(cpf)
             for c in clientes[cpf].values():
                 tudo.append(c)
-            print(f"|*| {' ':^14} |*| {' ':^20} |*| {' ':^30} |*| {' ':^11} |*| {' ':^30} |*| {' ':^12} |*|")
-            print(f"|*| {formatar_cpf(tudo[0]):^14} |*| {tudo[1]:^20} |*| {tudo[2]:^30} |*| {tudo[3]:^11} |*| {tudo[4]:^30} |*| {tudo[5]:^12} |*|")
+            print(f"|*| {' ':^14} |*| {' ':^20} |*| {' ':^30} |*| {' ':^15} |*| {' ':^30} |*| {' ':^12} |*|")
+            print(f"|*| {formatar_cpf(tudo[0]):^14} |*| {tudo[1]:^20} |*| {tudo[2]:^30} |*| {formatar_tel(tudo[3]):^15} |*| {tudo[4]:^30} |*| {tudo[5]:^12} |*|")
 
     print('='*145)
 
