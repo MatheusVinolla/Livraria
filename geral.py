@@ -4,7 +4,7 @@ from random import randint
 ######################################################
 #   Validações:
 def validar_email(email):
-    while not('.'in email) and not('@' in email):
+    while not('.'in email) or not('@' in email):
         email = input('\033[31mEmail Inválido, tente novamente >>> \033[m')
     return email
 
@@ -91,7 +91,8 @@ def ano_inteiro_presente(ano):
         return False    
 
 def validar_ano(ano): #Função para validar o ano para cadastrar um livro...
-    while (len(ano) != 4) and not(ano_inteiro_presente(ano)):
+    ano = str(ano)
+    while (len(ano) != 4) or not(ano_inteiro_presente(ano)):
         valor = input('\033[31mAno Inválido, tente novamente >>> \033[m')
     return ano
 
